@@ -1,0 +1,1 @@
+This mod adds a collection of miscellaneous features that I find useful. This includes some utility commands, QOL commands, and more. The mod also adds some features to how enchantments are displayed - This comes with a command to aid in enchanting.

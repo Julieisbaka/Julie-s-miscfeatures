@@ -7,6 +7,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -31,14 +32,31 @@ import java.util.concurrent.ConcurrentHashMap;
 public final class EnchantCommand {
 
         private static final Map<String, PendingUnsafeEnchant> PENDING_UNSAFE_CONFIRMATIONS = new ConcurrentHashMap<>();
+        private static volatile boolean cleanupHookRegistered;
 
     private EnchantCommand() {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext) {
+        registerCleanupHookIfNeeded();
         dispatcher.register(buildRootLiteral("miscfeatures", buildContext));
         dispatcher.register(buildRootLiteral("mf", buildContext));
     }
+
+        private static void registerCleanupHookIfNeeded() {
+                if (cleanupHookRegistered) {
+                        return;
+                }
+
+                synchronized (EnchantCommand.class) {
+                        if (cleanupHookRegistered) {
+                                return;
+                        }
+
+                        ServerTickEvents.END_SERVER_TICK.register(server -> cleanupExpiredConfirmations(System.currentTimeMillis()));
+                        cleanupHookRegistered = true;
+                }
+        }
 
     private static LiteralArgumentBuilder<CommandSourceStack> buildRootLiteral(String rootLiteral, CommandBuildContext buildContext) {
         return Commands.literal(rootLiteral)
@@ -235,7 +253,7 @@ public final class EnchantCommand {
                         int confirmWindowSeconds
         ) {
                 long now = System.currentTimeMillis();
-                PENDING_UNSAFE_CONFIRMATIONS.entrySet().removeIf(entry -> entry.getValue().isExpired(now));
+                cleanupExpiredConfirmations(now);
                 String actorKey = getActorKey(source);
                 PendingUnsafeEnchant pending = PENDING_UNSAFE_CONFIRMATIONS.get(actorKey);
                 if (pending != null && pending.matches(target.getUUID().toString(), enchantmentId.toString(), level, now)) {
@@ -253,6 +271,14 @@ public final class EnchantCommand {
                                 )
                 );
                 return false;
+        }
+
+        private static void cleanupExpiredConfirmations(long nowMillis) {
+                if (PENDING_UNSAFE_CONFIRMATIONS.isEmpty()) {
+                        return;
+                }
+
+                PENDING_UNSAFE_CONFIRMATIONS.entrySet().removeIf(entry -> entry.getValue().isExpired(nowMillis));
         }
 
         private static String getActorKey(CommandSourceStack source) {
