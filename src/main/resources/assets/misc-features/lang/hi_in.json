@@ -1,0 +1,84 @@
+{
+  "miscfeatures.config.title": "JulieISBaka विविध सुविधाएँ",
+
+  "miscfeatures.config.category.general": "सामान्य",
+  "miscfeatures.config.category.find_block": "ब्लॉक खोज",
+  "miscfeatures.config.category.find_item": "आइटम खोज",
+  "miscfeatures.config.category.find_entity": "एंटिटी खोज",
+  "miscfeatures.config.category.anvil": "निहाई",
+  "miscfeatures.config.category.enchant": "एन्कैंट",
+
+  "miscfeatures.config.developer_mode.label": "डेवलपर मोड",
+  "miscfeatures.config.developer_mode.tooltip.1": "misc-features की उन्नत सेटिंग्स सक्षम करता है।",
+  "miscfeatures.config.developer_mode.tooltip.2": "सक्षम होने पर अधिकतम रेडियस UI सीमा से बंधा नहीं रहेगा।",
+  "miscfeatures.config.developer_mode.tooltip.3": "टॉगल बदलने के बाद डेवलपर-विशेष विकल्प ताज़ा करने के लिए यह स्क्रीन फिर से खोलें।",
+
+  "miscfeatures.config.verbose_logging.label": "विस्तृत लॉगिंग",
+  "miscfeatures.config.verbose_logging.tooltip.1": "कमांड चलने की विस्तृत जानकारी लॉग करता है।",
+  "miscfeatures.config.verbose_logging.tooltip.2": "इसका प्रभाव देखने के लिए डेवलपर मोड चालू होना चाहिए।",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "/anvil ऑटो-इन्सर्ट आर्मर",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "सक्षम होने पर, /anvil मुख्य हाथ की आर्मर को स्लॉट 1 में अपने आप रखता है।",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "केवल तब लागू होगा जब मुख्य हाथ का आइटम आर्मर हो और स्लॉट 1 खाली हो।",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "/anvil ऑटो-इन्सर्ट हथियार/टूल",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "सक्षम होने पर, /anvil मुख्य हाथ के हथियार या टूल को स्लॉट 1 में अपने आप रखता है।",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "इसमें ड्यूरेबिलिटी वाले टूल/हथियार, धनुष, क्रॉसबो और ट्राइडेंट शामिल हैं।",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "/anvil ऑटो-इन्सर्ट नेम टैग",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "सक्षम होने पर, /anvil मुख्य हाथ का नेम टैग स्लॉट 1 में अपने आप रखता है।",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "तेज़ रीनेमिंग वर्कफ़्लो के लिए उपयोगी।",
+
+  "miscfeatures.config.enchant.allow_negative.label": "निगेटिव एन्कैंट लेवल की अनुमति",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "यह /miscfeatures enchant और /mf enchant को प्रभावित करता है।",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "सक्षम होने पर शून्य से कम एन्कैंट स्तर स्वीकार किए जाते हैं।",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behavior and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "उच्च एन्कैंट लेवल टेक्स्ट ठीक करें",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "डिफ़ॉल्ट रूप से बंद।",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "10 से ऊपर के एन्कैंट लेवल को कच्ची ट्रांसलेशन कुंजियों की बजाय पढ़ने योग्य टेक्स्ट में दिखाता है।",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "10 से ऊपर रोमन शैली उपयोग करें",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "ठीक किए गए उच्च-स्तरीय एन्कैंट डिस्प्ले को संख्यात्मक और रोमन अंकों के बीच बदलता है।",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "बंद = संख्यात्मक (जैसे 25), चालू = रोमन (जैसे XXV)।",
+
+  "miscfeatures.config.max_search_radius.label": "अधिकतम खोज रेडियस",
+  "miscfeatures.config.max_search_radius.tooltip.1": "/find block कमांड के रेडियस को सीमित करता है।",
+  "miscfeatures.config.max_search_radius.tooltip.2": "डेवलपर मोड UI सीमा हटाता है, लेकिन कमांड अभी भी आपके सेट मान से सीमित रहता है।",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "सामान्य मोड में यह सेटिंग %s तक सीमित है।",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "अनलोडेड चंक्स में खोजें",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "बंद होने पर /find block अनलोडेड चंक्स के ब्लॉक्स छोड़ देता है।",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "चालू होने पर /find block मौजूदा लोडेड क्षेत्र से बाहर चंक्स एक्सेस करने के लिए बाध्य कर सकता है।",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "बंद होने पर /find item अनलोडेड चंक्स के कंटेनर छोड़ देता है।",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "चालू होने पर /find item मौजूदा लोडेड क्षेत्र से बाहर चंक्स एक्सेस करने के लिए बाध्य कर सकता है।",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "बंद होने पर /find entity केवल पहले से लोडेड चंक्स में एंटिटी जांचता है।",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "चालू होने पर /find entity स्कैन से पहले दायरे के चंक्स लोड कर सकता है।",
+
+  "miscfeatures.config.max_search_results.label": "अधिकतम प्रदर्शित परिणाम",
+  "miscfeatures.config.max_search_results.tooltip.1": "प्रति लक्ष्य /find block के कितने परिणाम दिखाने हैं, यह सीमित करता है।",
+  "miscfeatures.config.max_search_results.tooltip.2": "सूची कटने पर भी कुल गिनती दिखाई जाती है।",
+
+  "miscfeatures.config.max_item_search_radius.label": "अधिकतम खोज रेडियस",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "/find item कमांड के रेडियस को सीमित करता है।",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "डेवलपर मोड UI सीमा हटाता है, लेकिन कमांड अभी भी आपके सेट मान से सीमित रहता है।",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "सामान्य मोड में यह सेटिंग %s तक सीमित है।",
+
+  "miscfeatures.config.max_find_item_results.label": "अधिकतम प्रदर्शित परिणाम",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "प्रति लक्ष्य /find item द्वारा दिखाए जाने वाले कंटेनर मैच की संख्या सीमित करता है।",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "सूची कटने पर भी आइटम और कंटेनर की कुल गिनती दिखाई जाती है।",
+
+  "miscfeatures.config.max_entity_search_radius.label": "अधिकतम खोज रेडियस",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "/find entity कमांड के रेडियस को सीमित करता है।",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "डेवलपर मोड UI सीमा हटाता है, लेकिन एंटिटी खोज वर्तमान दुनिया की लोडेड एंटिटी तक ही सीमित रहती है।",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "एंटिटी खोज केवल वर्तमान दुनिया की लोडेड एंटिटी पर काम करती है।",
+
+  "miscfeatures.config.max_find_entity_results.label": "अधिकतम प्रदर्शित परिणाम",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "प्रति लक्ष्य /find entity द्वारा दिखाए जाने वाले एंटिटी मैच की संख्या सीमित करता है।",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "सूची कटने पर भी कुल गिनती दिखाई जाती है।"
+}

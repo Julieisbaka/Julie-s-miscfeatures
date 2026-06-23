@@ -1,0 +1,84 @@
+{
+  "miscfeatures.config.title": "JulieISBaka Sonstige Features",
+
+  "miscfeatures.config.category.general": "Allgemein",
+  "miscfeatures.config.category.find_block": "Blocksuche",
+  "miscfeatures.config.category.find_item": "Gegenstandssuche",
+  "miscfeatures.config.category.find_entity": "Entitätensuche",
+  "miscfeatures.config.category.anvil": "Amboss",
+  "miscfeatures.config.category.enchant": "Verzauberung",
+
+  "miscfeatures.config.developer_mode.label": "Entwicklermodus",
+  "miscfeatures.config.developer_mode.tooltip.1": "Aktiviert erweiterte misc-features Einstellungen.",
+  "miscfeatures.config.developer_mode.tooltip.2": "Wenn aktiviert, ist der maximale Suchradius nicht mehr durch die UI begrenzt.",
+  "miscfeatures.config.developer_mode.tooltip.3": "Öffne diesen Bildschirm nach dem Umschalten erneut, um Entwickleroptionen zu aktualisieren.",
+
+  "miscfeatures.config.verbose_logging.label": "Ausführliche Protokollierung",
+  "miscfeatures.config.verbose_logging.tooltip.1": "Protokolliert detaillierte Informationen zur Befehlsausführung.",
+  "miscfeatures.config.verbose_logging.tooltip.2": "Der Entwicklermodus muss aktiviert sein, damit dies wirkt.",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "/anvil Auto-Einfügen Rüstung",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "Wenn aktiviert, fügt /anvil automatisch dein Rüstungsteil in der Haupthand in Slot 1 ein.",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "Gilt nur, wenn das Haupthand-Item Rüstung ist und Slot 1 leer ist.",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "/anvil Auto-Einfügen Waffen/Werkzeuge",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "Wenn aktiviert, fügt /anvil automatisch deine Waffe oder dein Werkzeug in der Haupthand in Slot 1 ein.",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "Enthält haltbare Werkzeuge/Waffen, Bögen, Armbrüste und Dreizacke.",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "/anvil Auto-Einfügen Namensschilder",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "Wenn aktiviert, fügt /anvil automatisch ein Namensschild aus der Haupthand in Slot 1 ein.",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "Nützlich für schnelles Umbenennen.",
+
+  "miscfeatures.config.enchant.allow_negative.label": "Negative Verzauberungen erlauben",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "Wirkt auf /miscfeatures enchant und /mf enchant.",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "Wenn aktiviert, sind Verzauberungslevel unter null erlaubt.",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behavior and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "Text für hohe Verzauberungsstufen korrigieren",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "Standardmäßig deaktiviert.",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "Korrigiert Verzauberungsstufen über 10, damit lesbarer Text statt roher Übersetzungsschlüssel angezeigt wird.",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "Römischen Stil für Stufen über 10 verwenden",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "Wechselt die korrigierte Anzeige hoher Stufen zwischen numerisch und römisch.",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "Aus = numerisch (z. B. 25), An = römisch (z. B. XXV).",
+
+  "miscfeatures.config.max_search_radius.label": "Maximaler Suchradius",
+  "miscfeatures.config.max_search_radius.tooltip.1": "Begrenzt den Radius des Befehls /find block.",
+  "miscfeatures.config.max_search_radius.tooltip.2": "Der Entwicklermodus hebt die UI-Begrenzung auf, aber der Befehl bleibt auf den konfigurierten Wert begrenzt.",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "Im normalen Modus ist diese Einstellung auf %s begrenzt.",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "Ungeladene Chunks durchsuchen",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "Wenn deaktiviert, überspringt /find block Blöcke in ungeladenen Chunks.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "Wenn aktiviert, kann /find block Zugriff auf Chunks außerhalb des geladenen Bereichs erzwingen.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "Wenn deaktiviert, überspringt /find item Container in ungeladenen Chunks.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "Wenn aktiviert, kann /find item Zugriff auf Chunks außerhalb des geladenen Bereichs erzwingen.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "Wenn deaktiviert, untersucht /find entity nur Entitäten in bereits geladenen Chunks.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "Wenn aktiviert, kann /find entity Chunks im Radius laden, bevor gesucht wird.",
+
+  "miscfeatures.config.max_search_results.label": "Maximal angezeigte Ergebnisse",
+  "miscfeatures.config.max_search_results.tooltip.1": "Begrenzt, wie viele /find block Treffer pro Ziel ausgegeben werden.",
+  "miscfeatures.config.max_search_results.tooltip.2": "Die Gesamtanzahl wird weiterhin angezeigt, auch wenn die Liste gekürzt ist.",
+
+  "miscfeatures.config.max_item_search_radius.label": "Maximaler Suchradius",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "Begrenzt den Radius des Befehls /find item.",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "Der Entwicklermodus hebt die UI-Begrenzung auf, aber der Befehl bleibt auf den konfigurierten Wert begrenzt.",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "Im normalen Modus ist diese Einstellung auf %s begrenzt.",
+
+  "miscfeatures.config.max_find_item_results.label": "Maximal angezeigte Ergebnisse",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "Begrenzt, wie viele Container-Treffer /find item pro Ziel ausgibt.",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "Gesamtanzahl von Items und Containern wird weiterhin angezeigt, auch wenn die Liste gekürzt ist.",
+
+  "miscfeatures.config.max_entity_search_radius.label": "Maximaler Suchradius",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "Begrenzt den Radius des Befehls /find entity.",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "Der Entwicklermodus hebt die UI-Begrenzung auf, aber Entitätensuchen arbeiten weiterhin nur mit geladenen Entitäten in der aktuellen Welt.",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "Entitätensuchen arbeiten nur mit geladenen Entitäten in der aktuellen Welt.",
+
+  "miscfeatures.config.max_find_entity_results.label": "Maximal angezeigte Ergebnisse",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "Begrenzt, wie viele Entitäts-Treffer /find entity pro Ziel ausgibt.",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "Die Gesamtanzahl wird weiterhin angezeigt, auch wenn die Liste gekürzt ist."
+}

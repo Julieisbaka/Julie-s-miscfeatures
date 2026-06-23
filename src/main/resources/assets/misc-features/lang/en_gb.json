@@ -1,0 +1,83 @@
+{
+  "miscfeatures.config.title": "JulieISBaka Misc Features",
+  "miscfeatures.config.category.general": "General",
+  "miscfeatures.config.category.find_block": "Find Block",
+  "miscfeatures.config.category.find_item": "Find Item",
+  "miscfeatures.config.category.find_entity": "Find Entity",
+  "miscfeatures.config.category.anvil": "Anvil",
+  "miscfeatures.config.category.enchant": "Enchant",
+
+  "miscfeatures.config.developer_mode.label": "Developer mode",
+  "miscfeatures.config.developer_mode.tooltip.1": "Enables advanced misc-features settings.",
+  "miscfeatures.config.developer_mode.tooltip.2": "When enabled, the maximum radius setting is no longer capped.",
+  "miscfeatures.config.developer_mode.tooltip.3": "Reopen this screen after changing the toggle to refresh developer-only entries.",
+
+  "miscfeatures.config.verbose_logging.label": "Verbose logging",
+  "miscfeatures.config.verbose_logging.tooltip.1": "Logs detailed misc-features command execution information.",
+  "miscfeatures.config.verbose_logging.tooltip.2": "Developer mode must be enabled for this setting to take effect.",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "/anvil auto-insert armour",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "When enabled, /anvil auto-inserts your main-hand armour piece into slot 1.",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "Only applies if the main hand item matches armour and slot 1 is empty.",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "/anvil auto-insert weapons/tools",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "When enabled, /anvil auto-inserts your main-hand weapon or tool into slot 1.",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "Includes damageable tools/weapons, bows, crossbows, and tridents.",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "/anvil auto-insert name tags",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "When enabled, /anvil auto-inserts a main-hand name tag into slot 1.",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "Useful for quick renaming workflows.",
+
+  "miscfeatures.config.enchant.allow_negative.label": "Allow negative enchants",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "When enabled, enchant levels below zero are accepted.",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behaviour and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "Fix high-level enchant text",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "Disabled by default.",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "Fixes enchant tooltip levels above 10 so they display readable text instead of raw translation keys.",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "Use Roman style for levels above 10",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "Switches fixed high-level enchant display between numeric and Roman numerals.",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "Off = numeric (e.g. 25), On = Roman (e.g. XXV).",
+
+  "miscfeatures.config.max_search_radius.label": "Maximum search radius",
+  "miscfeatures.config.max_search_radius.tooltip.1": "Caps the /find block command radius.",
+  "miscfeatures.config.max_search_radius.tooltip.2": "Developer mode removes the UI cap for this setting, but the command is still capped by whatever value you configure here.",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "In normal mode this setting itself is capped at %s.",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "Search unloaded chunks",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "When disabled, /find block skips blocks in chunks that are not already loaded.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "When enabled, /find block may force chunk access beyond the currently loaded area.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "When disabled, /find item skips containers in chunks that are not already loaded.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "When enabled, /find item may force chunk access beyond the currently loaded area.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "When disabled, /find entity only inspects entities in already loaded chunks.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "When enabled, /find entity may load chunks in range before scanning entities.",
+
+  "miscfeatures.config.max_search_results.label": "Maximum displayed results",
+  "miscfeatures.config.max_search_results.tooltip.1": "Limits how many /find block matches are printed per block or tag target.",
+  "miscfeatures.config.max_search_results.tooltip.2": "The total count is still reported even when the printed list is truncated.",
+
+  "miscfeatures.config.max_item_search_radius.label": "Maximum search radius",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "Caps the /find item command radius.",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "Developer mode removes the UI cap for this setting, but the command is still capped by whatever value you configure here.",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "In normal mode this setting itself is capped at %s.",
+
+  "miscfeatures.config.max_find_item_results.label": "Maximum displayed results",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "Limits how many container matches /find item prints per item or tag target.",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "The total item and container counts are still reported even when the printed list is truncated.",
+
+  "miscfeatures.config.max_entity_search_radius.label": "Maximum search radius",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "Caps the /find entity command radius.",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "Developer mode removes the UI cap for this setting, but entity searches still only operate on loaded entities in the current world.",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "Entity searches only operate on loaded entities in the current world.",
+
+  "miscfeatures.config.max_find_entity_results.label": "Maximum displayed results",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "Limits how many entity matches /find entity prints per entity or tag target.",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "The total count is still reported even when the printed list is truncated."
+}

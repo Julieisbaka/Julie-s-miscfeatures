@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.example.miscfeatures.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "EnchantmentMixin",
+    "ItemEnchantmentsMutableAccessor",
+    "ItemEnchantmentsValidationMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

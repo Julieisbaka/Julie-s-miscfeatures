@@ -1,0 +1,84 @@
+{
+  "miscfeatures.config.title": "JulieISBaka 便利機能",
+
+  "miscfeatures.config.category.general": "一般",
+  "miscfeatures.config.category.find_block": "ブロック検索",
+  "miscfeatures.config.category.find_item": "アイテム検索",
+  "miscfeatures.config.category.find_entity": "エンティティ検索",
+  "miscfeatures.config.category.anvil": "金床",
+  "miscfeatures.config.category.enchant": "エンチャント",
+
+  "miscfeatures.config.developer_mode.label": "開発者モード",
+  "miscfeatures.config.developer_mode.tooltip.1": "misc-features の高度な設定を有効化します。",
+  "miscfeatures.config.developer_mode.tooltip.2": "有効時、最大検索半径のUI上限が解除されます。",
+  "miscfeatures.config.developer_mode.tooltip.3": "切り替え後はこの画面を再度開き、開発者向け項目を更新してください。",
+
+  "miscfeatures.config.verbose_logging.label": "詳細ログ",
+  "miscfeatures.config.verbose_logging.tooltip.1": "コマンド実行の詳細情報をログ出力します。",
+  "miscfeatures.config.verbose_logging.tooltip.2": "有効化には開発者モードが必要です。",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "/anvil 防具の自動挿入",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "有効時、/anvil でメインハンドの防具をスロット1に自動挿入します。",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "メインハンドが防具で、スロット1が空の場合のみ適用されます。",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "/anvil 武器/ツールの自動挿入",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "有効時、/anvil でメインハンドの武器またはツールをスロット1に自動挿入します。",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "耐久のある武器/ツール、弓、クロスボウ、トライデントを含みます。",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "/anvil 名札の自動挿入",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "有効時、/anvil でメインハンドの名札をスロット1に自動挿入します。",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "素早いリネーム作業に便利です。",
+
+  "miscfeatures.config.enchant.allow_negative.label": "負のエンチャントレベルを許可",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "/miscfeatures enchant と /mf enchant に影響します。",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "有効時、0未満のエンチャントレベルを受け付けます。",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behavior and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "高レベルエンチャント表示を修正",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "デフォルトでは無効です。",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "10を超えるエンチャントレベル表示を、翻訳キーではなく読みやすい表記に修正します。",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "10以上をローマ数字表示にする",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "修正後の高レベル表示を数値表記とローマ数字表記で切り替えます。",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "オフ = 数値（例: 25）、オン = ローマ数字（例: XXV）。",
+
+  "miscfeatures.config.max_search_radius.label": "最大検索半径",
+  "miscfeatures.config.max_search_radius.tooltip.1": "/find block コマンドの検索半径を制限します。",
+  "miscfeatures.config.max_search_radius.tooltip.2": "開発者モードではUI上限は解除されますが、コマンドは設定値で制限されます。",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "通常モードではこの設定は %s に制限されます。",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "未ロードチャンクを検索",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "無効時、/find block は未ロードチャンク内のブロックをスキップします。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "有効時、/find block は現在のロード範囲外のチャンクへアクセスする場合があります。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "無効時、/find item は未ロードチャンク内のコンテナをスキップします。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "有効時、/find item は現在のロード範囲外のチャンクへアクセスする場合があります。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "無効時、/find entity は既にロード済みチャンクのエンティティのみを対象にします。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "有効時、/find entity は検索前に範囲内チャンクをロードする場合があります。",
+
+  "miscfeatures.config.max_search_results.label": "最大表示件数",
+  "miscfeatures.config.max_search_results.tooltip.1": "/find block の結果を対象ごとに何件表示するか制限します。",
+  "miscfeatures.config.max_search_results.tooltip.2": "一覧が省略されても合計件数は表示されます。",
+
+  "miscfeatures.config.max_item_search_radius.label": "最大検索半径",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "/find item コマンドの検索半径を制限します。",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "開発者モードではUI上限は解除されますが、コマンドは設定値で制限されます。",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "通常モードではこの設定は %s に制限されます。",
+
+  "miscfeatures.config.max_find_item_results.label": "最大表示件数",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "/find item で対象ごとに表示するコンテナ一致件数を制限します。",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "一覧が省略されてもアイテム/コンテナの合計は表示されます。",
+
+  "miscfeatures.config.max_entity_search_radius.label": "最大検索半径",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "/find entity コマンドの検索半径を制限します。",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "開発者モードではUI上限は解除されますが、エンティティ検索は現在のワールドでロード済みのエンティティのみを対象にします。",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "エンティティ検索は現在のワールドでロード済みのエンティティのみを対象にします。",
+
+  "miscfeatures.config.max_find_entity_results.label": "最大表示件数",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "/find entity で対象ごとに表示する一致件数を制限します。",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "一覧が省略されても合計件数は表示されます。"
+}

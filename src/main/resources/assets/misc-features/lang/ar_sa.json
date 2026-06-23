@@ -1,0 +1,84 @@
+{
+  "miscfeatures.config.title": "ميزات JulieISBaka المتنوعة",
+
+  "miscfeatures.config.category.general": "عام",
+  "miscfeatures.config.category.find_block": "البحث عن بلوك",
+  "miscfeatures.config.category.find_item": "البحث عن عنصر",
+  "miscfeatures.config.category.find_entity": "البحث عن كيان",
+  "miscfeatures.config.category.anvil": "السندان",
+  "miscfeatures.config.category.enchant": "السحر",
+
+  "miscfeatures.config.developer_mode.label": "وضع المطور",
+  "miscfeatures.config.developer_mode.tooltip.1": "يفعّل إعدادات misc-features المتقدمة.",
+  "miscfeatures.config.developer_mode.tooltip.2": "عند التفعيل، لن يكون الحد الأقصى لنطاق البحث مقيدًا بواجهة المستخدم.",
+  "miscfeatures.config.developer_mode.tooltip.3": "أعد فتح هذه الشاشة بعد التبديل لتحديث خيارات المطور.",
+
+  "miscfeatures.config.verbose_logging.label": "سجل تفصيلي",
+  "miscfeatures.config.verbose_logging.tooltip.1": "يسجل معلومات تفصيلية عن تنفيذ الأوامر.",
+  "miscfeatures.config.verbose_logging.tooltip.2": "يجب تفعيل وضع المطور ليعمل هذا الخيار.",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "إدراج الدروع تلقائيًا في /anvil",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "عند التفعيل، يقوم /anvil بإدراج قطعة الدرع في اليد الرئيسية تلقائيًا في الخانة 1.",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "ينطبق فقط إذا كان عنصر اليد الرئيسية درعًا وكانت الخانة 1 فارغة.",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "إدراج الأسلحة/الأدوات تلقائيًا في /anvil",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "عند التفعيل، يقوم /anvil بإدراج سلاحك أو أداتك في اليد الرئيسية تلقائيًا في الخانة 1.",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "يشمل الأسلحة/الأدوات ذات المتانة، الأقواس، القوس النشاب، والرمح الثلاثي.",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "إدراج بطاقات الاسم تلقائيًا في /anvil",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "عند التفعيل، يقوم /anvil بإدراج بطاقة الاسم من اليد الرئيسية تلقائيًا في الخانة 1.",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "مفيد لسير عمل إعادة التسمية السريع.",
+
+  "miscfeatures.config.enchant.allow_negative.label": "السماح بمستويات سحر سالبة",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "يؤثر على /miscfeatures enchant و /mf enchant.",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "عند التفعيل، يتم قبول مستويات السحر الأقل من الصفر.",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behavior and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "إصلاح نص مستويات السحر العالية",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "معطل افتراضيًا.",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "يصلح عرض مستويات السحر فوق 10 لتظهر بشكل مقروء بدل مفاتيح ترجمة خام.",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "استخدام النمط الروماني للمستويات فوق 10",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "يبدّل عرض المستويات العالية المصححة بين الأرقام العادية والرومانية.",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "إيقاف = رقمي (مثل 25)، تشغيل = روماني (مثل XXV).",
+
+  "miscfeatures.config.max_search_radius.label": "أقصى نطاق بحث",
+  "miscfeatures.config.max_search_radius.tooltip.1": "يحدد نطاق أمر /find block.",
+  "miscfeatures.config.max_search_radius.tooltip.2": "وضع المطور يزيل حد الواجهة، لكن الأمر يظل مقيدًا بالقيمة المضبوطة.",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "في الوضع العادي، هذا الإعداد محدود بـ %s.",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "البحث في المقاطع غير المحملة",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "عند التعطيل، يتخطى /find block البلوكات في المقاطع غير المحملة.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "عند التفعيل، قد يجبر /find block الوصول إلى مقاطع خارج المنطقة المحملة حاليًا.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "عند التعطيل، يتخطى /find item الحاويات في المقاطع غير المحملة.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "عند التفعيل، قد يجبر /find item الوصول إلى مقاطع خارج المنطقة المحملة حاليًا.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "عند التعطيل، يفحص /find entity الكيانات في المقاطع المحملة فقط.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "عند التفعيل، قد يقوم /find entity بتحميل المقاطع ضمن النطاق قبل الفحص.",
+
+  "miscfeatures.config.max_search_results.label": "الحد الأقصى للنتائج المعروضة",
+  "miscfeatures.config.max_search_results.tooltip.1": "يحدد عدد نتائج /find block المعروضة لكل هدف.",
+  "miscfeatures.config.max_search_results.tooltip.2": "يتم عرض العدد الإجمالي حتى عند اختصار القائمة.",
+
+  "miscfeatures.config.max_item_search_radius.label": "أقصى نطاق بحث",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "يحدد نطاق أمر /find item.",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "وضع المطور يزيل حد الواجهة، لكن الأمر يظل مقيدًا بالقيمة المضبوطة.",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "في الوضع العادي، هذا الإعداد محدود بـ %s.",
+
+  "miscfeatures.config.max_find_item_results.label": "الحد الأقصى للنتائج المعروضة",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "يحدد عدد تطابقات الحاويات التي يعرضها /find item لكل هدف.",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "يتم عرض إجمالي العناصر والحاويات حتى عند اختصار القائمة.",
+
+  "miscfeatures.config.max_entity_search_radius.label": "أقصى نطاق بحث",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "يحدد نطاق أمر /find entity.",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "وضع المطور يزيل حد الواجهة، لكن بحث الكيانات يظل يعمل فقط على الكيانات المحملة في العالم الحالي.",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "بحث الكيانات يعمل فقط على الكيانات المحملة في العالم الحالي.",
+
+  "miscfeatures.config.max_find_entity_results.label": "الحد الأقصى للنتائج المعروضة",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "يحدد عدد تطابقات الكيانات التي يعرضها /find entity لكل هدف.",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "يتم عرض العدد الإجمالي حتى عند اختصار القائمة."
+}

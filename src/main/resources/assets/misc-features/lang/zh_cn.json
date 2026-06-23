@@ -1,0 +1,84 @@
+{
+  "miscfeatures.config.title": "JulieISBaka 杂项功能",
+
+  "miscfeatures.config.category.general": "通用",
+  "miscfeatures.config.category.find_block": "查找方块",
+  "miscfeatures.config.category.find_item": "查找物品",
+  "miscfeatures.config.category.find_entity": "查找实体",
+  "miscfeatures.config.category.anvil": "铁砧",
+  "miscfeatures.config.category.enchant": "附魔",
+
+  "miscfeatures.config.developer_mode.label": "开发者模式",
+  "miscfeatures.config.developer_mode.tooltip.1": "启用 misc-features 的高级设置。",
+  "miscfeatures.config.developer_mode.tooltip.2": "启用后，最大搜索半径不再受界面上限限制。",
+  "miscfeatures.config.developer_mode.tooltip.3": "切换后请重新打开此界面以刷新开发者专用选项。",
+
+  "miscfeatures.config.verbose_logging.label": "详细日志",
+  "miscfeatures.config.verbose_logging.tooltip.1": "记录详细的命令执行信息。",
+  "miscfeatures.config.verbose_logging.tooltip.2": "此设置仅在开发者模式启用时生效。",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "/anvil 自动放入护甲",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "启用后，/anvil 会自动将主手护甲放入第 1 个铁砧槽位。",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "仅当主手物品为护甲且槽位 1 为空时生效。",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "/anvil 自动放入武器/工具",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "启用后，/anvil 会自动将主手武器或工具放入第 1 个铁砧槽位。",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "包含可损耗工具/武器、弓、弩与三叉戟。",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "/anvil 自动放入命名牌",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "启用后，/anvil 会自动将主手命名牌放入第 1 个铁砧槽位。",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "适合快速重命名流程。",
+
+  "miscfeatures.config.enchant.allow_negative.label": "允许负附魔等级",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "影响 /miscfeatures enchant 和 /mf enchant。",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "启用后，允许输入小于 0 的附魔等级。",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behavior and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "修复高等级附魔文本",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "默认关闭。",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "修复高于 10 级的附魔提示文本，显示可读等级而不是原始翻译键。",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "10 级以上使用罗马数字样式",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "在已修复的高等级附魔显示中切换“数字/罗马数字”样式。",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "关 = 数字（例如 25），开 = 罗马数字（例如 XXV）。",
+
+  "miscfeatures.config.max_search_radius.label": "最大搜索半径",
+  "miscfeatures.config.max_search_radius.tooltip.1": "限制 /find block 命令的搜索半径。",
+  "miscfeatures.config.max_search_radius.tooltip.2": "开发者模式会移除界面上限，但命令仍受你设置的值限制。",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "在普通模式下，此设置本身上限为 %s。",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "搜索未加载区块",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "关闭时，/find block 会跳过未加载区块中的方块。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "开启时，/find block 可能强制访问当前已加载范围外的区块。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "关闭时，/find item 会跳过未加载区块中的容器。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "开启时，/find item 可能强制访问当前已加载范围外的区块。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "关闭时，/find entity 仅检查已加载区块中的实体。",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "开启时，/find entity 可能先加载范围内区块再进行扫描。",
+
+  "miscfeatures.config.max_search_results.label": "最大显示结果数",
+  "miscfeatures.config.max_search_results.tooltip.1": "限制 /find block 每个目标输出的结果数量。",
+  "miscfeatures.config.max_search_results.tooltip.2": "即使列表被截断，仍会显示总数量。",
+
+  "miscfeatures.config.max_item_search_radius.label": "最大搜索半径",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "限制 /find item 命令的搜索半径。",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "开发者模式会移除界面上限，但命令仍受你设置的值限制。",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "在普通模式下，此设置本身上限为 %s。",
+
+  "miscfeatures.config.max_find_item_results.label": "最大显示结果数",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "限制 /find item 每个目标显示的容器匹配数量。",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "即使列表被截断，仍会显示物品与容器总数量。",
+
+  "miscfeatures.config.max_entity_search_radius.label": "最大搜索半径",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "限制 /find entity 命令的搜索半径。",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "开发者模式会移除界面上限，但实体搜索仍仅作用于当前世界中已加载实体。",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "实体搜索仅作用于当前世界中已加载实体。",
+
+  "miscfeatures.config.max_find_entity_results.label": "最大显示结果数",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "限制 /find entity 每个目标显示的实体匹配数量。",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "即使列表被截断，仍会显示总数量。"
+}

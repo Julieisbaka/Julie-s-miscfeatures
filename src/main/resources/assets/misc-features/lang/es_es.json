@@ -1,0 +1,84 @@
+{
+  "miscfeatures.config.title": "JulieISBaka Funciones Varias",
+
+  "miscfeatures.config.category.general": "General",
+  "miscfeatures.config.category.find_block": "Buscar bloque",
+  "miscfeatures.config.category.find_item": "Buscar objeto",
+  "miscfeatures.config.category.find_entity": "Buscar entidad",
+  "miscfeatures.config.category.anvil": "Yunque",
+  "miscfeatures.config.category.enchant": "Encantamientos",
+
+  "miscfeatures.config.developer_mode.label": "Modo desarrollador",
+  "miscfeatures.config.developer_mode.tooltip.1": "Habilita ajustes avanzados de misc-features.",
+  "miscfeatures.config.developer_mode.tooltip.2": "Al activarlo, el límite máximo de radio deja de estar restringido.",
+  "miscfeatures.config.developer_mode.tooltip.3": "Reabre esta pantalla después de cambiar el interruptor para refrescar las opciones de desarrollador.",
+
+  "miscfeatures.config.verbose_logging.label": "Registro detallado",
+  "miscfeatures.config.verbose_logging.tooltip.1": "Registra información detallada de ejecución de comandos.",
+  "miscfeatures.config.verbose_logging.tooltip.2": "El modo desarrollador debe estar activado para que esto tenga efecto.",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "/anvil inserción automática de armadura",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "Si está activado, /anvil inserta automáticamente tu armadura de la mano principal en la ranura 1.",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "Solo aplica si el objeto de la mano principal es armadura y la ranura 1 está vacía.",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "/anvil inserción automática de armas/herramientas",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "Si está activado, /anvil inserta automáticamente tu arma o herramienta de la mano principal en la ranura 1.",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "Incluye herramientas/armas con durabilidad, arcos, ballestas y tridentes.",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "/anvil inserción automática de etiquetas de nombre",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "Si está activado, /anvil inserta automáticamente una etiqueta de nombre de la mano principal en la ranura 1.",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "Útil para flujos rápidos de renombrado.",
+
+  "miscfeatures.config.enchant.allow_negative.label": "Permitir encantamientos negativos",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "Afecta a /miscfeatures enchant y /mf enchant.",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "Si está activado, se aceptan niveles de encantamiento por debajo de cero.",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behavior and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "Corregir texto de encantamientos de alto nivel",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "Desactivado por defecto.",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "Corrige niveles de encantamiento superiores a 10 para mostrar texto legible en lugar de claves de traducción.",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "Usar estilo romano para niveles superiores a 10",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "Cambia entre estilo numérico y romano para encantamientos de alto nivel corregidos.",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "Desactivado = numérico (p. ej. 25), Activado = romano (p. ej. XXV).",
+
+  "miscfeatures.config.max_search_radius.label": "Radio máximo de búsqueda",
+  "miscfeatures.config.max_search_radius.tooltip.1": "Limita el radio del comando /find block.",
+  "miscfeatures.config.max_search_radius.tooltip.2": "El modo desarrollador elimina el límite de la interfaz, pero el comando sigue limitado por el valor configurado.",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "En modo normal esta opción está limitada a %s.",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "Buscar en chunks no cargados",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "Si está desactivado, /find block omite bloques en chunks no cargados.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "Si está activado, /find block puede forzar acceso a chunks fuera del área cargada.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "Si está desactivado, /find item omite contenedores en chunks no cargados.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "Si está activado, /find item puede forzar acceso a chunks fuera del área cargada.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "Si está desactivado, /find entity solo inspecciona entidades en chunks cargados.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "Si está activado, /find entity puede cargar chunks en el rango antes de escanear.",
+
+  "miscfeatures.config.max_search_results.label": "Máximo de resultados mostrados",
+  "miscfeatures.config.max_search_results.tooltip.1": "Limita cuántos resultados de /find block se muestran por objetivo.",
+  "miscfeatures.config.max_search_results.tooltip.2": "El conteo total se sigue mostrando aunque la lista esté truncada.",
+
+  "miscfeatures.config.max_item_search_radius.label": "Radio máximo de búsqueda",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "Limita el radio del comando /find item.",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "El modo desarrollador elimina el límite de la interfaz, pero el comando sigue limitado por el valor configurado.",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "En modo normal esta opción está limitada a %s.",
+
+  "miscfeatures.config.max_find_item_results.label": "Máximo de resultados mostrados",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "Limita cuántas coincidencias de contenedores muestra /find item por objetivo.",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "El conteo total de objetos y contenedores se sigue mostrando aunque la lista esté truncada.",
+
+  "miscfeatures.config.max_entity_search_radius.label": "Radio máximo de búsqueda",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "Limita el radio del comando /find entity.",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "El modo desarrollador elimina el límite de la interfaz, pero /find entity sigue operando solo con entidades cargadas en el mundo actual.",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "Las búsquedas de entidades solo operan sobre entidades cargadas en el mundo actual.",
+
+  "miscfeatures.config.max_find_entity_results.label": "Máximo de resultados mostrados",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "Limita cuántas coincidencias de entidades muestra /find entity por objetivo.",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "El conteo total se sigue mostrando aunque la lista esté truncada."
+}

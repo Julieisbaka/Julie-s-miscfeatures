@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "misc-features",
+  "version": "${version}",
+  "name": "JulieISBaka Misc Features",
+  "description": "A collection of useful miscellaneous features, including /find block, /find item, and /find entity commands.",
+  "authors": [
+    "JulieISBaka"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.miscfeatures.MiscFeaturesMod"
+    ],
+    "modmenu": [
+      "com.example.miscfeatures.client.MiscFeaturesModMenu"
+    ]
+  },
+  "mixins": [
+    "misc-features.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "*",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

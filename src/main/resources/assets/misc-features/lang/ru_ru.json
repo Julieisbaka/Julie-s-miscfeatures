@@ -1,0 +1,84 @@
+{
+  "miscfeatures.config.title": "JulieISBaka Разные функции",
+
+  "miscfeatures.config.category.general": "Общее",
+  "miscfeatures.config.category.find_block": "Поиск блоков",
+  "miscfeatures.config.category.find_item": "Поиск предметов",
+  "miscfeatures.config.category.find_entity": "Поиск сущностей",
+  "miscfeatures.config.category.anvil": "Наковальня",
+  "miscfeatures.config.category.enchant": "Чары",
+
+  "miscfeatures.config.developer_mode.label": "Режим разработчика",
+  "miscfeatures.config.developer_mode.tooltip.1": "Включает расширенные настройки misc-features.",
+  "miscfeatures.config.developer_mode.tooltip.2": "При включении максимальный радиус больше не ограничивается интерфейсом.",
+  "miscfeatures.config.developer_mode.tooltip.3": "После переключения откройте этот экран заново, чтобы обновить параметры разработчика.",
+
+  "miscfeatures.config.verbose_logging.label": "Подробный лог",
+  "miscfeatures.config.verbose_logging.tooltip.1": "Логирует подробную информацию о выполнении команд.",
+  "miscfeatures.config.verbose_logging.tooltip.2": "Для работы требуется включённый режим разработчика.",
+
+  "miscfeatures.config.anvil.auto_insert_armor.label": "/anvil авто-вставка брони",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.1": "Если включено, /anvil автоматически кладёт броню из основной руки в слот 1.",
+  "miscfeatures.config.anvil.auto_insert_armor.tooltip.2": "Работает только если в основной руке броня и слот 1 пуст.",
+
+  "miscfeatures.config.anvil.auto_insert_weapons.label": "/anvil авто-вставка оружия/инструментов",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.1": "Если включено, /anvil автоматически кладёт оружие или инструмент из основной руки в слот 1.",
+  "miscfeatures.config.anvil.auto_insert_weapons.tooltip.2": "Включает прочные инструменты/оружие, луки, арбалеты и трезубцы.",
+
+  "miscfeatures.config.anvil.auto_insert_name_tags.label": "/anvil авто-вставка бирок",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1": "Если включено, /anvil автоматически кладёт бирку из основной руки в слот 1.",
+  "miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2": "Удобно для быстрого переименования.",
+
+  "miscfeatures.config.enchant.allow_negative.label": "Разрешить отрицательные уровни чар",
+  "miscfeatures.config.enchant.allow_negative.tooltip.1": "Влияет на /miscfeatures enchant и /mf enchant.",
+  "miscfeatures.config.enchant.allow_negative.tooltip.2": "Если включено, принимаются уровни чар ниже нуля.",
+
+  "miscfeatures.config.enchant.allow_high_level.label": "Allow enchant levels above 255",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.1": "Affects /miscfeatures enchant and /mf enchant.",
+  "miscfeatures.config.enchant.allow_high_level.tooltip.2": "When enabled, enchant levels above 255 are accepted as unsafe developer behavior.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label": "Prevent creative packet crash on unsafe enchants",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1": "When enabled, negative and >255 enchants are blocked for creative targets to avoid known creative-slot packet crashes.",
+  "miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2": "Disable this if you want fully unsafe behavior and accept crash risk.",
+  "miscfeatures.config.enchant.fix_high_level_text.label": "Исправить текст чар высокого уровня",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.1": "По умолчанию отключено.",
+  "miscfeatures.config.enchant.fix_high_level_text.tooltip.2": "Исправляет отображение уровней чар выше 10: вместо сырых ключей перевода показывает читаемый текст.",
+
+  "miscfeatures.config.enchant.high_level_style_roman.label": "Использовать римский стиль для уровней выше 10",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.1": "Переключает исправленное отображение между числами и римскими цифрами.",
+  "miscfeatures.config.enchant.high_level_style_roman.tooltip.2": "Выкл = число (напр. 25), Вкл = римское (напр. XXV).",
+
+  "miscfeatures.config.max_search_radius.label": "Максимальный радиус поиска",
+  "miscfeatures.config.max_search_radius.tooltip.1": "Ограничивает радиус команды /find block.",
+  "miscfeatures.config.max_search_radius.tooltip.2": "Режим разработчика снимает лимит интерфейса, но команда всё равно ограничена заданным значением.",
+  "miscfeatures.config.max_search_radius.normal_cap.tooltip": "В обычном режиме этот параметр ограничен значением %s.",
+
+  "miscfeatures.config.search_unloaded_chunks.label": "Искать в незагруженных чанках",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.1": "Если выключено, /find block пропускает блоки в незагруженных чанках.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.block.2": "Если включено, /find block может принудительно обращаться к чанкам вне текущей загруженной области.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.1": "Если выключено, /find item пропускает контейнеры в незагруженных чанках.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.item.2": "Если включено, /find item может принудительно обращаться к чанкам вне текущей загруженной области.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.1": "Если выключено, /find entity проверяет только сущности в уже загруженных чанках.",
+  "miscfeatures.config.search_unloaded_chunks.tooltip.entity.2": "Если включено, /find entity может загрузить чанки в радиусе перед сканированием.",
+
+  "miscfeatures.config.max_search_results.label": "Максимум отображаемых результатов",
+  "miscfeatures.config.max_search_results.tooltip.1": "Ограничивает количество результатов /find block, выводимых для каждой цели.",
+  "miscfeatures.config.max_search_results.tooltip.2": "Общее количество всё равно показывается, даже если список обрезан.",
+
+  "miscfeatures.config.max_item_search_radius.label": "Максимальный радиус поиска",
+  "miscfeatures.config.max_item_search_radius.tooltip.1": "Ограничивает радиус команды /find item.",
+  "miscfeatures.config.max_item_search_radius.tooltip.2": "Режим разработчика снимает лимит интерфейса, но команда всё равно ограничена заданным значением.",
+  "miscfeatures.config.max_item_search_radius.normal_cap.tooltip": "В обычном режиме этот параметр ограничен значением %s.",
+
+  "miscfeatures.config.max_find_item_results.label": "Максимум отображаемых результатов",
+  "miscfeatures.config.max_find_item_results.tooltip.1": "Ограничивает количество совпадений контейнеров, выводимых /find item для каждой цели.",
+  "miscfeatures.config.max_find_item_results.tooltip.2": "Общее количество предметов и контейнеров всё равно показывается, даже если список обрезан.",
+
+  "miscfeatures.config.max_entity_search_radius.label": "Максимальный радиус поиска",
+  "miscfeatures.config.max_entity_search_radius.tooltip.1": "Ограничивает радиус команды /find entity.",
+  "miscfeatures.config.max_entity_search_radius.tooltip.2": "Режим разработчика снимает лимит интерфейса, но поиск сущностей всё равно работает только по загруженным сущностям в текущем мире.",
+  "miscfeatures.config.max_entity_search_radius.normal_cap.tooltip": "Поиск сущностей работает только по загруженным сущностям в текущем мире.",
+
+  "miscfeatures.config.max_find_entity_results.label": "Максимум отображаемых результатов",
+  "miscfeatures.config.max_find_entity_results.tooltip.1": "Ограничивает количество совпадений сущностей, выводимых /find entity для каждой цели.",
+  "miscfeatures.config.max_find_entity_results.tooltip.2": "Общее количество всё равно показывается, даже если список обрезан."
+}
