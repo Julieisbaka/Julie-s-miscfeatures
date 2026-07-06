@@ -6,6 +6,8 @@ import com.google.gson.JsonParser;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.suggestion.Suggestions;
+import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -19,9 +21,11 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -51,9 +55,44 @@ public final class MiscFeaturesCommand {
                 .then(Commands.literal("coverage")
                     .executes(MiscFeaturesCommand::showLocaleCoverage)
                     .then(Commands.argument("locale", StringArgumentType.word())
+                        .suggests(MiscFeaturesCommand::suggestLocales)
                         .executes(MiscFeaturesCommand::showLocaleCoverageForLocale)
                         .then(Commands.literal("verbose")
                             .executes(MiscFeaturesCommand::showLocaleCoverageForLocaleVerbose)))));
+    }
+
+    private static CompletableFuture<Suggestions> suggestLocales(
+            CommandContext<CommandSourceStack> context,
+            SuggestionsBuilder builder
+    ) {
+        Path langDir = FabricLoader.getInstance()
+                .getModContainer(MiscFeaturesMod.MOD_ID)
+                .flatMap(container -> container.findPath("assets/misc-features/lang"))
+                .orElse(null);
+
+        if (langDir == null || !Files.exists(langDir)) {
+            return Suggestions.empty();
+        }
+
+        try (Stream<Path> files = Files.list(langDir)) {
+            List<String> locales = files
+                    .map(path -> path.getFileName().toString())
+                    .filter(name -> name.endsWith(".json"))
+                    .map(name -> name.substring(0, name.length() - 5).toLowerCase(Locale.ROOT))
+                    .distinct()
+                    .sorted(String::compareToIgnoreCase)
+                    .toList();
+
+            String remainingLower = builder.getRemainingLowerCase();
+            for (String locale : locales) {
+                if (locale.startsWith(remainingLower)) {
+                    builder.suggest(locale);
+                }
+            }
+            return builder.buildFuture();
+        } catch (IOException exception) {
+            return Suggestions.empty();
+        }
     }
 
     private static int showHelp(CommandContext<CommandSourceStack> context) {
@@ -189,7 +228,7 @@ public final class MiscFeaturesCommand {
             return 0;
         }
 
-        String locale = StringArgumentType.getString(context, "locale").toLowerCase();
+        String locale = StringArgumentType.getString(context, "locale").toLowerCase(Locale.ROOT);
         if (!coverageData.localeKeys().containsKey(locale)) {
             context.getSource().sendFailure(Component.literal(
                     "Unknown locale: " + locale + ". Use /mf locale coverage to list known locales."
