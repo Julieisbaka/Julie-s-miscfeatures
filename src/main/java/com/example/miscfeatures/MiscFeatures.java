@@ -1,15 +1,15 @@
 package com.example.miscfeatures;
 
 import com.example.miscfeatures.command.ConfigCommand;
-import com.example.miscfeatures.command.EnchantCommand;
+import com.example.miscfeatures.command.MFEnchant;
 import com.example.miscfeatures.command.EnchantLevelArgument;
-import com.example.miscfeatures.command.AnvilCommand;
-import com.example.miscfeatures.command.FindEntityCommand;
-import com.example.miscfeatures.command.FindItemCommand;
-import com.example.miscfeatures.command.MiscFeaturesCommand;
-import com.example.miscfeatures.command.SearchCommand;
-import com.example.miscfeatures.command.WearCommand;
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.command.Anvil;
+import com.example.miscfeatures.command.FindEntity;
+import com.example.miscfeatures.command.FindItem;
+import com.example.miscfeatures.command.Command;
+import com.example.miscfeatures.command.FindBlock;
+import com.example.miscfeatures.command.Wear;
+import com.example.miscfeatures.config.Config;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -17,21 +17,21 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MiscFeaturesMod implements ModInitializer {
+public class MiscFeatures implements ModInitializer {
 
     public static final String MOD_ID = "misc-features";
     public static final String LOG_PREFIX = MOD_ID + ": ";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     public static void verbose(String message, Object... args) {
-        if (MiscFeaturesConfig.getInstance().isVerboseLogging()) {
+        if (Config.getInstance().isVerboseLogging()) {
             LOGGER.info(LOG_PREFIX + message, args);
         }
     }
 
     @Override
     public void onInitialize() {
-        MiscFeaturesConfig.getInstance().load();
+        Config.getInstance().load();
 
         ArgumentTypeRegistry.registerArgumentType(
             Identifier.fromNamespaceAndPath(MOD_ID, "enchant_level"),
@@ -41,14 +41,14 @@ public class MiscFeaturesMod implements ModInitializer {
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
                 {
-                    MiscFeaturesCommand.register(dispatcher);
-                    SearchCommand.register(dispatcher);
-                    FindItemCommand.register(dispatcher);
-                    FindEntityCommand.register(dispatcher);
+                    Command.register(dispatcher);
+                    FindBlock.register(dispatcher);
+                    FindItem.register(dispatcher);
+                    FindEntity.register(dispatcher);
                     ConfigCommand.register(dispatcher);
-                    AnvilCommand.register(dispatcher);
-                    EnchantCommand.register(dispatcher, registryAccess);
-                    WearCommand.register(dispatcher);
+                    Anvil.register(dispatcher);
+                    MFEnchant.register(dispatcher, registryAccess);
+                    Wear.register(dispatcher);
                 });
 
         LOGGER.info(LOG_PREFIX + "JulieISBaka Misc Features initialized.");

@@ -1,6 +1,6 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.config.Config;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -97,90 +97,90 @@ public final class ConfigCommand {
     }
 
     private static int show(CommandContext<CommandSourceStack> context) {
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         CommandSourceStack source = context.getSource();
         source.sendSuccess(() -> Component.literal("§6misc-features config"), false);
 
         sendConfigLine(source, "maxSearchRadius", "§f" + config.getMaxSearchRadius(),
-            "default = " + MiscFeaturesConfig.DEFAULT_MAX_SEARCH_RADIUS + ", min = 1, max = " + MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS,
+            "default = " + Config.DEFAULT_MAX_SEARCH_RADIUS + ", min = 1, max = " + Config.ABSOLUTE_MAX_SEARCH_RADIUS,
             "Maximum radius allowed for /find block searches.");
         sendConfigLine(source, "maxItemSearchRadius", "§f" + config.getMaxItemSearchRadius(),
-            "default = " + MiscFeaturesConfig.DEFAULT_MAX_ITEM_SEARCH_RADIUS + ", min = 1, max = " + MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS,
+            "default = " + Config.DEFAULT_MAX_ITEM_SEARCH_RADIUS + ", min = 1, max = " + Config.ABSOLUTE_MAX_SEARCH_RADIUS,
             "Maximum radius allowed for /find item searches.");
         sendConfigLine(source, "maxEntitySearchRadius", "§f" + config.getMaxEntitySearchRadius(),
-            "default = " + MiscFeaturesConfig.DEFAULT_MAX_ENTITY_SEARCH_RADIUS + ", min = 1, max = " + MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS,
+            "default = " + Config.DEFAULT_MAX_ENTITY_SEARCH_RADIUS + ", min = 1, max = " + Config.ABSOLUTE_MAX_SEARCH_RADIUS,
             "Maximum radius allowed for /find entity searches.");
         sendConfigLine(source, "maxSearchResults", "§f" + config.getMaxSearchResults(),
-            "default = " + MiscFeaturesConfig.DEFAULT_MAX_SEARCH_RESULTS + ", min = 1",
+            "default = " + Config.DEFAULT_MAX_SEARCH_RESULTS + ", min = 1",
             "Maximum printed /find block results per target before truncation.");
         sendConfigLine(source, "maxFindItemResults", "§f" + config.getMaxFindItemResults(),
-            "default = " + MiscFeaturesConfig.DEFAULT_MAX_FIND_ITEM_RESULTS + ", min = 1",
+            "default = " + Config.DEFAULT_MAX_FIND_ITEM_RESULTS + ", min = 1",
             "Maximum printed /find item container results per target before truncation.");
         sendConfigLine(source, "maxFindEntityResults", "§f" + config.getMaxFindEntityResults(),
-            "default = " + MiscFeaturesConfig.DEFAULT_MAX_FIND_ENTITY_RESULTS + ", min = 1",
+            "default = " + Config.DEFAULT_MAX_FIND_ENTITY_RESULTS + ", min = 1",
             "Maximum printed /find entity results per target before truncation.");
 
         sendConfigLine(source, "searchUnloadedChunks", formatBoolean(config.shouldSearchUnloadedChunks()),
-            "default = " + MiscFeaturesConfig.DEFAULT_SEARCH_UNLOADED_CHUNKS,
+            "default = " + Config.DEFAULT_SEARCH_UNLOADED_CHUNKS,
             "Controls unloaded-chunk behavior for /find block.");
         sendConfigLine(source, "searchItemsInUnloadedChunks", formatBoolean(config.shouldSearchItemsInUnloadedChunks()),
-            "default = " + MiscFeaturesConfig.DEFAULT_SEARCH_ITEMS_IN_UNLOADED_CHUNKS,
+            "default = " + Config.DEFAULT_SEARCH_ITEMS_IN_UNLOADED_CHUNKS,
             "Controls unloaded-chunk behavior for /find item.");
         sendConfigLine(source, "searchEntitiesInUnloadedChunks", formatBoolean(config.shouldSearchEntitiesInUnloadedChunks()),
-            "default = " + MiscFeaturesConfig.DEFAULT_SEARCH_ENTITIES_IN_UNLOADED_CHUNKS,
+            "default = " + Config.DEFAULT_SEARCH_ENTITIES_IN_UNLOADED_CHUNKS,
             "Controls unloaded-chunk behavior for /find entity.");
 
         sendConfigLine(source, "developerMode", formatBoolean(config.isDeveloperMode()),
-            "default = " + MiscFeaturesConfig.DEFAULT_DEVELOPER_MODE,
+            "default = " + Config.DEFAULT_DEVELOPER_MODE,
             "Unlocks developer-only toggles and relaxed caps.");
         sendConfigLine(source, "verboseLogging", formatBoolean(config.isVerboseLogging()),
-            "default = " + MiscFeaturesConfig.DEFAULT_VERBOSE_LOGGING,
+            "default = " + Config.DEFAULT_VERBOSE_LOGGING,
             "Logs extra command diagnostics when developer mode is enabled.");
 
         sendConfigLine(source, "anvilAutoInsertArmor", formatBoolean(config.shouldAnvilAutoInsertArmor()),
-            "default = " + MiscFeaturesConfig.DEFAULT_ANVIL_AUTO_INSERT_ARMOR,
+            "default = " + Config.DEFAULT_ANVIL_AUTO_INSERT_ARMOR,
             "Auto-inserts held armor-like item into /anvil input slot.");
         sendConfigLine(source, "anvilAutoInsertWeapons", formatBoolean(config.shouldAnvilAutoInsertWeapons()),
-            "default = " + MiscFeaturesConfig.DEFAULT_ANVIL_AUTO_INSERT_WEAPONS,
+            "default = " + Config.DEFAULT_ANVIL_AUTO_INSERT_WEAPONS,
             "Auto-inserts held weapon/tool into /anvil input slot.");
         sendConfigLine(source, "anvilAutoInsertNameTags", formatBoolean(config.shouldAnvilAutoInsertNameTags()),
-            "default = " + MiscFeaturesConfig.DEFAULT_ANVIL_AUTO_INSERT_NAME_TAGS,
+            "default = " + Config.DEFAULT_ANVIL_AUTO_INSERT_NAME_TAGS,
             "Auto-inserts held name tag into /anvil input slot.");
 
         sendConfigLine(source, "allowNegativeEnchants", formatBoolean(config.shouldAllowNegativeEnchants()),
-            "default = " + MiscFeaturesConfig.DEFAULT_ALLOW_NEGATIVE_ENCHANTS,
+            "default = " + Config.DEFAULT_ALLOW_NEGATIVE_ENCHANTS,
             "Allows /mf enchant levels below 0 in developer mode.");
         sendConfigLine(source, "allowHighLevelEnchants", formatBoolean(config.shouldAllowHighLevelEnchants()),
-            "default = " + MiscFeaturesConfig.DEFAULT_ALLOW_HIGH_LEVEL_ENCHANTS + ", dev-only, allows >255",
+            "default = " + Config.DEFAULT_ALLOW_HIGH_LEVEL_ENCHANTS + ", dev-only, allows >255",
             "Allows /mf enchant levels above 255 in developer mode.");
         sendConfigLine(source, "requireConfirmForUnsafeEnchants", formatBoolean(config.shouldRequireConfirmForUnsafeEnchants()),
-            "default = " + MiscFeaturesConfig.DEFAULT_REQUIRE_CONFIRM_FOR_UNSAFE_ENCHANTS + ", covers <0 and >255",
+            "default = " + Config.DEFAULT_REQUIRE_CONFIRM_FOR_UNSAFE_ENCHANTS + ", covers <0 and >255",
             "Requires repeating unsafe enchant command within confirmation window.");
         sendConfigLine(source, "negativeEnchantConfirmWindowSeconds", "§f" + config.getNegativeEnchantConfirmWindowSeconds(),
-            "default = " + MiscFeaturesConfig.DEFAULT_NEGATIVE_ENCHANT_CONFIRM_WINDOW_SECONDS + ", min = 1, max = 30",
+            "default = " + Config.DEFAULT_NEGATIVE_ENCHANT_CONFIRM_WINDOW_SECONDS + ", min = 1, max = 30",
             "Seconds allowed to repeat unsafe enchant command for confirmation.");
 
         sendConfigLine(source, "requirePermissionForEnchant", formatBoolean(config.shouldRequirePermissionForEnchant()),
-            "default = " + MiscFeaturesConfig.DEFAULT_REQUIRE_PERMISSION_FOR_ENCHANT,
+            "default = " + Config.DEFAULT_REQUIRE_PERMISSION_FOR_ENCHANT,
             "Requires configured permission level for /mf enchant.");
         sendConfigLine(source, "enchantPermissionLevel", "§f" + config.getEnchantPermissionLevel(),
-            "default = " + MiscFeaturesConfig.DEFAULT_ENCHANT_PERMISSION_LEVEL + ", min = 0, max = 4",
+            "default = " + Config.DEFAULT_ENCHANT_PERMISSION_LEVEL + ", min = 0, max = 4",
             "Permission level required when enchant permission gate is enabled.");
         sendConfigLine(source, "requirePermissionForAnvil", formatBoolean(config.shouldRequirePermissionForAnvil()),
-            "default = " + MiscFeaturesConfig.DEFAULT_REQUIRE_PERMISSION_FOR_ANVIL,
+            "default = " + Config.DEFAULT_REQUIRE_PERMISSION_FOR_ANVIL,
             "Requires configured permission level for /anvil.");
         sendConfigLine(source, "anvilPermissionLevel", "§f" + config.getAnvilPermissionLevel(),
-            "default = " + MiscFeaturesConfig.DEFAULT_ANVIL_PERMISSION_LEVEL + ", min = 0, max = 4",
+            "default = " + Config.DEFAULT_ANVIL_PERMISSION_LEVEL + ", min = 0, max = 4",
             "Permission level required when anvil permission gate is enabled.");
 
         sendConfigLine(source, "preventCreativePacketCrashOnUnsafeEnchants", formatBoolean(config.shouldPreventCreativePacketCrashOnUnsafeEnchants()),
-            "default = " + MiscFeaturesConfig.DEFAULT_PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS + ", covers <0 and >255",
+            "default = " + Config.DEFAULT_PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS + ", covers <0 and >255",
             "Blocks unsafe enchants on creative targets to reduce known packet crash risk.");
         sendConfigLine(source, "fixHighLevelEnchantText", formatBoolean(config.shouldFixHighLevelEnchantText()),
-            "default = " + MiscFeaturesConfig.DEFAULT_FIX_HIGH_LEVEL_ENCHANT_TEXT,
+            "default = " + Config.DEFAULT_FIX_HIGH_LEVEL_ENCHANT_TEXT,
             "Fixes tooltip text display for enchant levels above 10.");
         sendConfigLine(source, "highLevelEnchantStyleRoman", formatBoolean(config.shouldUseRomanForHighLevelEnchantText()),
-            "default = " + MiscFeaturesConfig.DEFAULT_HIGH_LEVEL_ENCHANT_STYLE_ROMAN,
+            "default = " + Config.DEFAULT_HIGH_LEVEL_ENCHANT_STYLE_ROMAN,
             "Uses Roman numerals for high enchant level tooltip formatting.");
 
         return 1;
@@ -201,7 +201,7 @@ public final class ConfigCommand {
         String rawSetting = StringArgumentType.getString(context, "setting");
         String setting = rawSetting.toLowerCase(Locale.ROOT);
         String value = StringArgumentType.getString(context, "value");
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
 
         switch (setting) {
             case "maxsearchradius" -> config.setMaxSearchRadius(parseInt(value, rawSetting));
@@ -290,7 +290,7 @@ public final class ConfigCommand {
         return 1;
     }
 
-    private static String getCurrentValue(MiscFeaturesConfig config, String normalizedSetting) {
+    private static String getCurrentValue(Config config, String normalizedSetting) {
         return switch (normalizedSetting) {
             case "maxsearchradius" -> String.valueOf(config.getMaxSearchRadius());
             case "maxitemsearchradius" -> String.valueOf(config.getMaxItemSearchRadius());

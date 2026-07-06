@@ -1,7 +1,7 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.MiscFeaturesMod;
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.MiscFeatures;
+import com.example.miscfeatures.config.Config;
 import com.example.miscfeatures.mixin.ItemEnchantmentsMutableAccessor;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -29,12 +29,12 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public final class EnchantCommand {
+public final class MFEnchant {
 
         private static final Map<String, PendingUnsafeEnchant> PENDING_UNSAFE_CONFIRMATIONS = new ConcurrentHashMap<>();
         private static volatile boolean cleanupHookRegistered;
 
-    private EnchantCommand() {
+    private MFEnchant() {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext) {
@@ -48,7 +48,7 @@ public final class EnchantCommand {
                         return;
                 }
 
-                synchronized (EnchantCommand.class) {
+                synchronized (MFEnchant.class) {
                         if (cleanupHookRegistered) {
                                 return;
                         }
@@ -61,7 +61,7 @@ public final class EnchantCommand {
     private static LiteralArgumentBuilder<CommandSourceStack> buildRootLiteral(String rootLiteral, CommandBuildContext buildContext) {
         return Commands.literal(rootLiteral)
                 .then(Commands.literal("enchant")
-                        .requires(EnchantCommand::canUseEnchantCommand)
+                        .requires(MFEnchant::canUseEnchantCommand)
                         .then(Commands.literal("dry-run")
                                 .then(buildEnchantArguments(buildContext, true)))
                         .then(Commands.argument("target", EntityArgument.player())
@@ -81,7 +81,7 @@ public final class EnchantCommand {
     }
 
         private static boolean canUseEnchantCommand(CommandSourceStack source) {
-                MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+                Config config = Config.getInstance();
                 if (!config.shouldRequirePermissionForEnchant()) {
                         return true;
                 }
@@ -91,7 +91,7 @@ public final class EnchantCommand {
 
         private static int execute(CommandContext<CommandSourceStack> context, boolean dryRun) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
 
         if (config.shouldRequirePermissionForEnchant() && !hasRequiredPermission(source, config.getEnchantPermissionLevel())) {
             source.sendFailure(Component.literal(
@@ -204,7 +204,7 @@ public final class EnchantCommand {
                         return 0;
         }
 
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
                 "Applied unsafe enchant {} level {} to {} main hand (requested={}, allowNegative={}, allowHighLevel={})",
                 enchantmentId,
                 finalLevel,

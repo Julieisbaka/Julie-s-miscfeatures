@@ -1,7 +1,7 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.MiscFeaturesMod;
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.MiscFeatures;
+import com.example.miscfeatures.config.Config;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -33,9 +33,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class SearchCommand {
+public class FindBlock {
 
-    private static final String SEARCH_USAGE = "/find block <radius> <block|#tag>[property=value] [more blocks or tags...] [--sort=distance|alphabetic|chunk] [--page=1] [--limit=25] [--loaded-only]";
+    private static final String FIND_BLOCK_USAGE = "/find block <radius> <block|#tag>[property=value] [more blocks or tags...] [--sort=distance|alphabetic|chunk] [--page=1] [--limit=25] [--loaded-only]";
     private static final List<String> FLAG_SUGGESTIONS = List.of(
             "--sort=distance",
             "--sort=alphabetic",
@@ -52,8 +52,8 @@ public class SearchCommand {
                 .then(Commands.literal("block")
                     .then(Commands.argument("radius", IntegerArgumentType.integer(1))
                         .then(Commands.argument("blocks", StringArgumentType.greedyString())
-                            .suggests(SearchCommand::suggestBlocks)
-                            .executes(SearchCommand::execute))))
+                            .suggests(FindBlock::suggestBlocks)
+                            .executes(FindBlock::execute))))
         );
     }
 
@@ -65,13 +65,13 @@ public class SearchCommand {
         BuiltInRegistries.BLOCK.keySet().stream().map(Identifier::toString).forEach(suggestions::add);
         BuiltInRegistries.BLOCK.getTags().map(named -> "#" + named.key().location()).forEach(suggestions::add);
         suggestions.addAll(FLAG_SUGGESTIONS);
-        return AreaCommandSupport.suggestTokenList(builder, suggestions.stream());
+        return AreaSupport.suggestTokenList(builder, suggestions.stream());
     }
 
     private static int execute(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
         int radius = IntegerArgumentType.getInteger(context, "radius");
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         int maxRadius = config.getMaxSearchRadius();
         int maxResults = config.getMaxSearchResults();
         boolean searchUnloadedChunks = config.shouldSearchUnloadedChunks();
@@ -80,11 +80,11 @@ public class SearchCommand {
         int requestedLimit = maxResults;
         String input = StringArgumentType.getString(context, "blocks");
 
-        if (!AreaCommandSupport.validateRadius(source, radius, maxRadius, "maxSearchRadius")) {
+        if (!AreaSupport.validateRadius(source, radius, maxRadius, "maxSearchRadius")) {
             return 0;
         }
 
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
             "Running /find block with radius={} searchUnloadedChunks={} rawTargets='{}'",
             radius,
             searchUnloadedChunks,
@@ -95,7 +95,7 @@ public class SearchCommand {
         Map<Block, Set<SearchTarget>> targetIndex = new HashMap<>();
         List<String> unknownTokens = new ArrayList<>();
 
-        for (String token : AreaCommandSupport.tokenizeTargets(input)) {
+        for (String token : AreaSupport.tokenizeTargets(input)) {
             if (token.isEmpty()) {
                 continue;
             }
@@ -120,7 +120,7 @@ public class SearchCommand {
                 continue;
             }
 
-            Integer parsedPage = AreaCommandSupport.parsePositiveIntFlag(token, "--page=");
+            Integer parsedPage = AreaSupport.parsePositiveIntFlag(token, "--page=");
             if (token.toLowerCase().startsWith("--page=")) {
                 if (parsedPage == null) {
                     unknownTokens.add(token);
@@ -130,7 +130,7 @@ public class SearchCommand {
                 continue;
             }
 
-            Integer parsedLimit = AreaCommandSupport.parsePositiveIntFlag(token, "--limit=");
+            Integer parsedLimit = AreaSupport.parsePositiveIntFlag(token, "--limit=");
             if (token.toLowerCase().startsWith("--limit=")) {
                 if (parsedLimit == null) {
                     unknownTokens.add(token);
@@ -148,17 +148,17 @@ public class SearchCommand {
         int pageLimit = Math.max(1, Math.min(maxResults, requestedLimit));
 
         for (String unknown : unknownTokens) {
-            source.sendFailure(AreaCommandSupport.getUnknownBlockError(unknown));
+            source.sendFailure(AreaSupport.getUnknownBlockError(unknown));
         }
 
         if (targets.isEmpty()) {
             source.sendFailure(Component.literal(
-                    "No valid blocks or tags specified. Usage: §e" + SEARCH_USAGE
+                    "No valid blocks or tags specified. Usage: §e" + FIND_BLOCK_USAGE
             ));
             return 0;
         }
 
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
             "Indexed {} unique targets across {} unique blocks",
             targets.size(),
             targetIndex.size()
@@ -176,7 +176,7 @@ public class SearchCommand {
         final boolean searchUnloadedChunksFinal = searchUnloadedChunks;
 
         source.sendSuccess(() -> Component.literal(
-                "§7Searching " + AreaCommandSupport.cubeWidth(radius) + "³ blocks around ["
+                "§7Searching " + AreaSupport.cubeWidth(radius) + "³ blocks around ["
                         + center.getX() + ", " + center.getY() + ", " + center.getZ() + "]…"
         ), false);
 
@@ -187,7 +187,7 @@ public class SearchCommand {
             totalCounts.put(target, 0L);
         }
 
-        AreaCommandSupport.forEachBlockInCube(level, center, radius, searchUnloadedChunksFinal, mutablePos -> {
+        AreaSupport.forEachBlockInCube(level, center, radius, searchUnloadedChunksFinal, mutablePos -> {
             BlockState state = level.getBlockState(mutablePos);
             Set<SearchTarget> matches = targetIndex.get(state.getBlock());
             if (matches == null || matches.isEmpty()) {
@@ -239,12 +239,12 @@ public class SearchCommand {
             ), false);
 
             for (BlockPos pos : pagedPositions) {
-                source.sendSuccess(() -> Component.literal("  ").append(AreaCommandSupport.createCoordinateComponent(pos)), false);
+                source.sendSuccess(() -> Component.literal("  ").append(AreaSupport.createCoordinateComponent(pos)), false);
             }
         }
 
         int finalTotal = grandTotal;
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
             "Search complete with {} total matches across {} targets",
             finalTotal,
             targets.size()

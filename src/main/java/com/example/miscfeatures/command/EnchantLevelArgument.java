@@ -1,6 +1,6 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.config.Config;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.arguments.ArgumentType;
@@ -78,12 +78,12 @@ public final class EnchantLevelArgument implements ArgumentType<Integer> {
     }
 
     private static boolean canUseNegativeLevelsFromConfig() {
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         return config.isDeveloperMode() && config.shouldAllowNegativeEnchants();
     }
 
     private static boolean canUseHighLevelsFromConfig() {
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         return config.isDeveloperMode() && config.shouldAllowHighLevelEnchants();
     }
 

@@ -1,6 +1,6 @@
 package com.example.miscfeatures.mixin;
 
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.config.Config;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -20,7 +20,7 @@ public final class EnchantmentMixin {
             int level,
             CallbackInfoReturnable<Component> cir
     ) {
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         if (!config.shouldFixHighLevelEnchantText() || level <= 10) {
             return;
         }

@@ -1,6 +1,6 @@
 package com.example.miscfeatures.config;
 
-import com.example.miscfeatures.MiscFeaturesMod;
+import com.example.miscfeatures.MiscFeatures;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -12,7 +12,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public final class MiscFeaturesConfig {
+public final class Config {
 
     public static final int DEFAULT_MAX_SEARCH_RADIUS = 64;
     public static final int DEFAULT_MAX_ITEM_SEARCH_RADIUS = 64;
@@ -43,7 +43,7 @@ public final class MiscFeaturesConfig {
     public static final boolean DEFAULT_FIX_HIGH_LEVEL_ENCHANT_TEXT = false;
     public static final boolean DEFAULT_HIGH_LEVEL_ENCHANT_STYLE_ROMAN = false;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final MiscFeaturesConfig INSTANCE = new MiscFeaturesConfig();
+    private static final Config INSTANCE = new Config();
 
     private final Path configPath = FabricLoader.getInstance().getConfigDir().resolve("misc-features.json");
     private int maxSearchRadius = DEFAULT_MAX_SEARCH_RADIUS;
@@ -72,10 +72,10 @@ public final class MiscFeaturesConfig {
     private boolean fixHighLevelEnchantText = DEFAULT_FIX_HIGH_LEVEL_ENCHANT_TEXT;
     private boolean highLevelEnchantStyleRoman = DEFAULT_HIGH_LEVEL_ENCHANT_STYLE_ROMAN;
 
-    private MiscFeaturesConfig() {
+    private Config() {
     }
 
-    public static MiscFeaturesConfig getInstance() {
+    public static Config getInstance() {
         return INSTANCE;
     }
 
@@ -147,7 +147,7 @@ public final class MiscFeaturesConfig {
                     : DEFAULT_HIGH_LEVEL_ENCHANT_STYLE_ROMAN);
             }
         } catch (IOException | JsonSyntaxException exception) {
-            MiscFeaturesMod.LOGGER.warn(MiscFeaturesMod.LOG_PREFIX + "Failed to load config from {}. Using defaults.", configPath, exception);
+            MiscFeatures.LOGGER.warn(MiscFeatures.LOG_PREFIX + "Failed to load config from {}. Using defaults.", configPath, exception);
             maxSearchRadius = DEFAULT_MAX_SEARCH_RADIUS;
             maxItemSearchRadius = DEFAULT_MAX_ITEM_SEARCH_RADIUS;
             maxEntitySearchRadius = DEFAULT_MAX_ENTITY_SEARCH_RADIUS;
@@ -211,7 +211,7 @@ public final class MiscFeaturesConfig {
                 ), writer);
             }
         } catch (IOException exception) {
-            MiscFeaturesMod.LOGGER.error(MiscFeaturesMod.LOG_PREFIX + "Failed to save config to {}.", configPath, exception);
+            MiscFeatures.LOGGER.error(MiscFeatures.LOG_PREFIX + "Failed to save config to {}.", configPath, exception);
         }
     }
 

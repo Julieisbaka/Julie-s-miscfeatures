@@ -18,17 +18,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 
-public final class WearCommand {
+public final class Wear {
 
-    private WearCommand() {
+    private Wear() {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 Commands.literal("wear")
                         .then(Commands.argument("slot", StringArgumentType.word())
-                                .suggests(WearCommand::suggestSlots)
-                                .executes(WearCommand::execute))
+                                .suggests(Wear::suggestSlots)
+                                .executes(Wear::execute))
         );
     }
 

@@ -1,7 +1,7 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.MiscFeaturesMod;
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.MiscFeatures;
+import com.example.miscfeatures.config.Config;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -32,7 +32,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-public final class FindEntityCommand {
+public final class FindEntity {
 
     private static final String FIND_ENTITY_USAGE = "/find entity <radius> <entity|#tag> [more entities or tags...] [--sort=distance|alphabetic|chunk] [--page=1] [--limit=25] [--loaded-only]";
     private static final List<String> FLAG_SUGGESTIONS = List.of(
@@ -45,7 +45,7 @@ public final class FindEntityCommand {
             "--include-unloaded"
     );
 
-    private FindEntityCommand() {
+    private FindEntity() {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -54,8 +54,8 @@ public final class FindEntityCommand {
                 .then(Commands.literal("entity")
                     .then(Commands.argument("radius", IntegerArgumentType.integer(1))
                         .then(Commands.argument("entities", StringArgumentType.greedyString())
-                            .suggests(FindEntityCommand::suggestEntities)
-                            .executes(FindEntityCommand::execute))))
+                            .suggests(FindEntity::suggestEntities)
+                            .executes(FindEntity::execute))))
         );
     }
 
@@ -67,13 +67,13 @@ public final class FindEntityCommand {
         BuiltInRegistries.ENTITY_TYPE.keySet().stream().map(Identifier::toString).forEach(suggestions::add);
         BuiltInRegistries.ENTITY_TYPE.getTags().map(named -> "#" + named.key().location()).forEach(suggestions::add);
         suggestions.addAll(FLAG_SUGGESTIONS);
-        return AreaCommandSupport.suggestTokenList(builder, suggestions.stream());
+        return AreaSupport.suggestTokenList(builder, suggestions.stream());
     }
 
     private static int execute(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
         int radius = IntegerArgumentType.getInteger(context, "radius");
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         int maxRadius = config.getMaxEntitySearchRadius();
         int maxResults = config.getMaxFindEntityResults();
         boolean searchUnloadedChunks = config.shouldSearchEntitiesInUnloadedChunks();
@@ -82,11 +82,11 @@ public final class FindEntityCommand {
         int requestedLimit = maxResults;
         String input = StringArgumentType.getString(context, "entities");
 
-        if (!AreaCommandSupport.validateRadius(source, radius, maxRadius, "maxEntitySearchRadius")) {
+        if (!AreaSupport.validateRadius(source, radius, maxRadius, "maxEntitySearchRadius")) {
             return 0;
         }
 
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
             "Running /find entity with radius={} searchUnloadedChunks={} rawTargets='{}'",
                 radius,
             searchUnloadedChunks,
@@ -97,7 +97,7 @@ public final class FindEntityCommand {
         Map<EntityType<?>, Set<EntitySearchTarget>> targetIndex = new HashMap<>();
         List<String> unknownTokens = new ArrayList<>();
 
-        for (String token : AreaCommandSupport.tokenizeTargets(input)) {
+        for (String token : AreaSupport.tokenizeTargets(input)) {
             if (token.isEmpty()) {
                 continue;
             }
@@ -122,7 +122,7 @@ public final class FindEntityCommand {
                 continue;
             }
 
-            Integer parsedPage = AreaCommandSupport.parsePositiveIntFlag(token, "--page=");
+            Integer parsedPage = AreaSupport.parsePositiveIntFlag(token, "--page=");
             if (token.toLowerCase().startsWith("--page=")) {
                 if (parsedPage == null) {
                     unknownTokens.add(token);
@@ -132,7 +132,7 @@ public final class FindEntityCommand {
                 continue;
             }
 
-            Integer parsedLimit = AreaCommandSupport.parsePositiveIntFlag(token, "--limit=");
+            Integer parsedLimit = AreaSupport.parsePositiveIntFlag(token, "--limit=");
             if (token.toLowerCase().startsWith("--limit=")) {
                 if (parsedLimit == null) {
                     unknownTokens.add(token);
@@ -150,7 +150,7 @@ public final class FindEntityCommand {
         int pageLimit = Math.max(1, Math.min(maxResults, requestedLimit));
 
         for (String unknown : unknownTokens) {
-            source.sendFailure(AreaCommandSupport.getUnknownEntityError(unknown));
+            source.sendFailure(AreaSupport.getUnknownEntityError(unknown));
         }
 
         if (targets.isEmpty()) {
@@ -160,7 +160,7 @@ public final class FindEntityCommand {
             return 0;
         }
 
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
                 "Indexed {} unique entity targets across {} unique entity types",
                 targets.size(),
                 targetIndex.size()
@@ -249,12 +249,12 @@ public final class FindEntityCommand {
 
             for (EntityMatch match : pagedMatches) {
                 source.sendSuccess(() -> Component.literal("  " + match.entityName() + " at ")
-                        .append(AreaCommandSupport.createCoordinateComponent(match.pos())), false);
+                        .append(AreaSupport.createCoordinateComponent(match.pos())), false);
             }
         }
 
         int finalTotal = grandTotal;
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
                 "Find entity complete with {} total matches across {} targets",
                 finalTotal,
                 targets.size()

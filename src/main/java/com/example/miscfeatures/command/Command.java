@@ -1,6 +1,6 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.MiscFeaturesMod;
+import com.example.miscfeatures.MiscFeatures;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.brigadier.CommandDispatcher;
@@ -30,12 +30,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-public final class MiscFeaturesCommand {
+public final class Command {
 
     private static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("(?<!%)%(?:\\d+\\$)?[sSdD]");
     private static final Pattern COLOR_CODE_PATTERN = Pattern.compile("(?i)§[0-9A-FK-OR]");
 
-    private MiscFeaturesCommand() {
+    private Command() {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -45,20 +45,20 @@ public final class MiscFeaturesCommand {
 
     private static com.mojang.brigadier.builder.LiteralArgumentBuilder<CommandSourceStack> buildRootLiteral(String rootLiteral) {
         return Commands.literal(rootLiteral)
-                .executes(MiscFeaturesCommand::showHelp)
+                .executes(Command::showHelp)
                 .then(Commands.literal("help")
-                .executes(MiscFeaturesCommand::showHelp)
-                .then(Commands.literal("enchant").executes(MiscFeaturesCommand::showHelpEnchant))
-                .then(Commands.literal("anvil").executes(MiscFeaturesCommand::showHelpAnvil))
-                .then(Commands.literal("config").executes(MiscFeaturesCommand::showHelpConfig)))
+                .executes(Command::showHelp)
+                .then(Commands.literal("enchant").executes(Command::showHelpEnchant))
+                .then(Commands.literal("anvil").executes(Command::showHelpAnvil))
+                .then(Commands.literal("config").executes(Command::showHelpConfig)))
             .then(Commands.literal("locale")
                 .then(Commands.literal("coverage")
-                    .executes(MiscFeaturesCommand::showLocaleCoverage)
+                    .executes(Command::showLocaleCoverage)
                     .then(Commands.argument("locale", StringArgumentType.word())
-                        .suggests(MiscFeaturesCommand::suggestLocales)
-                        .executes(MiscFeaturesCommand::showLocaleCoverageForLocale)
+                        .suggests(Command::suggestLocales)
+                        .executes(Command::showLocaleCoverageForLocale)
                         .then(Commands.literal("verbose")
-                            .executes(MiscFeaturesCommand::showLocaleCoverageForLocaleVerbose)))));
+                            .executes(Command::showLocaleCoverageForLocaleVerbose)))));
     }
 
     private static CompletableFuture<Suggestions> suggestLocales(
@@ -66,7 +66,7 @@ public final class MiscFeaturesCommand {
             SuggestionsBuilder builder
     ) {
         Path langDir = FabricLoader.getInstance()
-                .getModContainer(MiscFeaturesMod.MOD_ID)
+                .getModContainer(MiscFeatures.MOD_ID)
                 .flatMap(container -> container.findPath("assets/misc-features/lang"))
                 .orElse(null);
 
@@ -307,7 +307,7 @@ public final class MiscFeaturesCommand {
 
     private static LocaleCoverageData loadLocaleCoverageData(CommandContext<CommandSourceStack> context) {
         Path langDir = FabricLoader.getInstance()
-                .getModContainer(MiscFeaturesMod.MOD_ID)
+                .getModContainer(MiscFeatures.MOD_ID)
                 .flatMap(container -> container.findPath("assets/misc-features/lang"))
                 .orElse(null);
 

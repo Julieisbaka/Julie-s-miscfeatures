@@ -1,6 +1,6 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.config.Config;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -17,24 +17,24 @@ import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-public final class AnvilCommand {
+public final class Anvil {
 
-    private AnvilCommand() {
+    private Anvil() {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 Commands.literal("anvil")
-                        .requires(AnvilCommand::canUseAnvilCommand)
-                        .executes(AnvilCommand::execute)
+                        .requires(Anvil::canUseAnvilCommand)
+                        .executes(Anvil::execute)
                 .then(Commands.literal("rename")
                     .then(Commands.argument("name", StringArgumentType.greedyString())
-                        .executes(AnvilCommand::renameMainHandItem)))
+                        .executes(Anvil::renameMainHandItem)))
         );
     }
 
     private static boolean canUseAnvilCommand(CommandSourceStack source) {
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         if (!config.shouldRequirePermissionForAnvil()) {
             return true;
         }
@@ -49,7 +49,7 @@ public final class AnvilCommand {
             return 0;
         }
 
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
 
         ItemStack mainHand = player.getMainHandItem();
 
@@ -117,7 +117,7 @@ public final class AnvilCommand {
             return null;
         }
 
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         if (config.shouldRequirePermissionForAnvil() && !hasRequiredPermission(source, config.getAnvilPermissionLevel())) {
             source.sendFailure(Component.literal(
                     "You do not have permission to use /anvil. Required permission level: " + config.getAnvilPermissionLevel()
@@ -128,7 +128,7 @@ public final class AnvilCommand {
         return player;
     }
 
-    private static boolean shouldAutoInsert(MiscFeaturesConfig config, ItemStack stack) {
+    private static boolean shouldAutoInsert(Config config, ItemStack stack) {
         boolean isArmorLike = stack.has(DataComponents.EQUIPPABLE);
         boolean isWeaponOrToolLike = stack.isDamageableItem()
                 || stack.is(Items.BOW)

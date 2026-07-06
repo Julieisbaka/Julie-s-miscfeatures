@@ -17,9 +17,9 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
-public final class AreaCommandSupport {
+public final class AreaSupport {
 
-    private AreaCommandSupport() {
+    private AreaSupport() {
     }
 
     public static List<String> tokenizeTargets(String input) {

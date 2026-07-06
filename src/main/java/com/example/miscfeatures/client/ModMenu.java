@@ -1,6 +1,6 @@
 package com.example.miscfeatures.client;
 
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.config.Config;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
@@ -8,12 +8,12 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.network.chat.Component;
 
-public class MiscFeaturesModMenu implements ModMenuApi {
+public class ModMenu implements ModMenuApi {
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> {
-            MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+            Config config = Config.getInstance();
             boolean developerMode = config.isDeveloperMode();
             ConfigBuilder builder = ConfigBuilder.create()
                     .setParentScreen(parent)
@@ -32,7 +32,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.developer_mode.label"),
                             config.isDeveloperMode()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_DEVELOPER_MODE)
+                    .setDefaultValue(Config.DEFAULT_DEVELOPER_MODE)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.developer_mode.tooltip.1"),
                             Component.translatable("miscfeatures.config.developer_mode.tooltip.2"),
@@ -48,7 +48,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                                 Component.translatable("miscfeatures.config.verbose_logging.label"),
                                 config.isVerboseLogging()
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_VERBOSE_LOGGING)
+                        .setDefaultValue(Config.DEFAULT_VERBOSE_LOGGING)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.verbose_logging.tooltip.1"),
                                 Component.translatable("miscfeatures.config.verbose_logging.tooltip.2")
@@ -61,7 +61,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.anvil.auto_insert_armor.label"),
                             config.shouldAnvilAutoInsertArmor()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_ANVIL_AUTO_INSERT_ARMOR)
+                    .setDefaultValue(Config.DEFAULT_ANVIL_AUTO_INSERT_ARMOR)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.anvil.auto_insert_armor.tooltip.1"),
                             Component.translatable("miscfeatures.config.anvil.auto_insert_armor.tooltip.2")
@@ -73,7 +73,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.anvil.auto_insert_weapons.label"),
                             config.shouldAnvilAutoInsertWeapons()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_ANVIL_AUTO_INSERT_WEAPONS)
+                    .setDefaultValue(Config.DEFAULT_ANVIL_AUTO_INSERT_WEAPONS)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.anvil.auto_insert_weapons.tooltip.1"),
                             Component.translatable("miscfeatures.config.anvil.auto_insert_weapons.tooltip.2")
@@ -85,7 +85,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.anvil.auto_insert_name_tags.label"),
                             config.shouldAnvilAutoInsertNameTags()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_ANVIL_AUTO_INSERT_NAME_TAGS)
+                    .setDefaultValue(Config.DEFAULT_ANVIL_AUTO_INSERT_NAME_TAGS)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.anvil.auto_insert_name_tags.tooltip.1"),
                             Component.translatable("miscfeatures.config.anvil.auto_insert_name_tags.tooltip.2")
@@ -98,7 +98,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                                 Component.translatable("miscfeatures.config.enchant.allow_negative.label"),
                                 config.shouldAllowNegativeEnchants()
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_ALLOW_NEGATIVE_ENCHANTS)
+                        .setDefaultValue(Config.DEFAULT_ALLOW_NEGATIVE_ENCHANTS)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.enchant.allow_negative.tooltip.1"),
                                 Component.translatable("miscfeatures.config.enchant.allow_negative.tooltip.2")
@@ -110,7 +110,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                                 Component.translatable("miscfeatures.config.enchant.allow_high_level.label"),
                                 config.shouldAllowHighLevelEnchants()
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_ALLOW_HIGH_LEVEL_ENCHANTS)
+                        .setDefaultValue(Config.DEFAULT_ALLOW_HIGH_LEVEL_ENCHANTS)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.enchant.allow_high_level.tooltip.1"),
                                 Component.translatable("miscfeatures.config.enchant.allow_high_level.tooltip.2")
@@ -122,7 +122,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                                 Component.translatable("miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.label"),
                                 config.shouldPreventCreativePacketCrashOnUnsafeEnchants()
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS)
+                        .setDefaultValue(Config.DEFAULT_PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.1"),
                                 Component.translatable("miscfeatures.config.enchant.prevent_creative_packet_crash_unsafe.tooltip.2")
@@ -135,7 +135,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.enchant.fix_high_level_text.label"),
                             config.shouldFixHighLevelEnchantText()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_FIX_HIGH_LEVEL_ENCHANT_TEXT)
+                    .setDefaultValue(Config.DEFAULT_FIX_HIGH_LEVEL_ENCHANT_TEXT)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.enchant.fix_high_level_text.tooltip.1"),
                             Component.translatable("miscfeatures.config.enchant.fix_high_level_text.tooltip.2")
@@ -147,7 +147,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.enchant.high_level_style_roman.label"),
                             config.shouldUseRomanForHighLevelEnchantText()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_HIGH_LEVEL_ENCHANT_STYLE_ROMAN)
+                    .setDefaultValue(Config.DEFAULT_HIGH_LEVEL_ENCHANT_STYLE_ROMAN)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.enchant.high_level_style_roman.tooltip.1"),
                             Component.translatable("miscfeatures.config.enchant.high_level_style_roman.tooltip.2")
@@ -160,7 +160,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                                 Component.translatable("miscfeatures.config.max_search_radius.label"),
                                 config.getMaxSearchRadius()
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_SEARCH_RADIUS)
+                        .setDefaultValue(Config.DEFAULT_MAX_SEARCH_RADIUS)
                         .setMin(1)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.max_search_radius.tooltip.1"),
@@ -171,14 +171,14 @@ public class MiscFeaturesModMenu implements ModMenuApi {
             } else {
                 searchCategory.addEntry(entries.startIntField(
                                 Component.translatable("miscfeatures.config.max_search_radius.label"),
-                                Math.min(config.getMaxSearchRadius(), MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                                Math.min(config.getMaxSearchRadius(), Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_SEARCH_RADIUS)
+                        .setDefaultValue(Config.DEFAULT_MAX_SEARCH_RADIUS)
                         .setMin(1)
-                        .setMax(MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                        .setMax(Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.max_search_radius.tooltip.1"),
-                                Component.translatable("miscfeatures.config.max_search_radius.normal_cap.tooltip", MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                                Component.translatable("miscfeatures.config.max_search_radius.normal_cap.tooltip", Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         )
                         .setSaveConsumer(config::setMaxSearchRadius)
                         .build());
@@ -188,7 +188,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.label"),
                             config.shouldSearchUnloadedChunks()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_SEARCH_UNLOADED_CHUNKS)
+                    .setDefaultValue(Config.DEFAULT_SEARCH_UNLOADED_CHUNKS)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.tooltip.block.1"),
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.tooltip.block.2")
@@ -200,7 +200,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.max_search_results.label"),
                             config.getMaxSearchResults()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_SEARCH_RESULTS)
+                    .setDefaultValue(Config.DEFAULT_MAX_SEARCH_RESULTS)
                     .setMin(1)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.max_search_results.tooltip.1"),
@@ -214,7 +214,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                                 Component.translatable("miscfeatures.config.max_item_search_radius.label"),
                                 config.getMaxItemSearchRadius()
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_ITEM_SEARCH_RADIUS)
+                        .setDefaultValue(Config.DEFAULT_MAX_ITEM_SEARCH_RADIUS)
                         .setMin(1)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.max_item_search_radius.tooltip.1"),
@@ -225,14 +225,14 @@ public class MiscFeaturesModMenu implements ModMenuApi {
             } else {
                 findItemCategory.addEntry(entries.startIntField(
                                 Component.translatable("miscfeatures.config.max_item_search_radius.label"),
-                                Math.min(config.getMaxItemSearchRadius(), MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                                Math.min(config.getMaxItemSearchRadius(), Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_ITEM_SEARCH_RADIUS)
+                        .setDefaultValue(Config.DEFAULT_MAX_ITEM_SEARCH_RADIUS)
                         .setMin(1)
-                        .setMax(MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                        .setMax(Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.max_item_search_radius.tooltip.1"),
-                                Component.translatable("miscfeatures.config.max_item_search_radius.normal_cap.tooltip", MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                                Component.translatable("miscfeatures.config.max_item_search_radius.normal_cap.tooltip", Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         )
                         .setSaveConsumer(config::setMaxItemSearchRadius)
                         .build());
@@ -242,7 +242,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.label"),
                             config.shouldSearchItemsInUnloadedChunks()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_SEARCH_ITEMS_IN_UNLOADED_CHUNKS)
+                    .setDefaultValue(Config.DEFAULT_SEARCH_ITEMS_IN_UNLOADED_CHUNKS)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.tooltip.item.1"),
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.tooltip.item.2")
@@ -254,7 +254,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.max_find_item_results.label"),
                             config.getMaxFindItemResults()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_FIND_ITEM_RESULTS)
+                    .setDefaultValue(Config.DEFAULT_MAX_FIND_ITEM_RESULTS)
                     .setMin(1)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.max_find_item_results.tooltip.1"),
@@ -268,7 +268,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                                 Component.translatable("miscfeatures.config.max_entity_search_radius.label"),
                                 config.getMaxEntitySearchRadius()
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_ENTITY_SEARCH_RADIUS)
+                        .setDefaultValue(Config.DEFAULT_MAX_ENTITY_SEARCH_RADIUS)
                         .setMin(1)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.max_entity_search_radius.tooltip.1"),
@@ -279,14 +279,14 @@ public class MiscFeaturesModMenu implements ModMenuApi {
             } else {
                 findEntityCategory.addEntry(entries.startIntField(
                                 Component.translatable("miscfeatures.config.max_entity_search_radius.label"),
-                                Math.min(config.getMaxEntitySearchRadius(), MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                                Math.min(config.getMaxEntitySearchRadius(), Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         )
-                        .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_ENTITY_SEARCH_RADIUS)
+                        .setDefaultValue(Config.DEFAULT_MAX_ENTITY_SEARCH_RADIUS)
                         .setMin(1)
-                        .setMax(MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                        .setMax(Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         .setTooltip(
                                 Component.translatable("miscfeatures.config.max_entity_search_radius.tooltip.1"),
-                                Component.translatable("miscfeatures.config.max_entity_search_radius.normal_cap.tooltip", MiscFeaturesConfig.ABSOLUTE_MAX_SEARCH_RADIUS)
+                                Component.translatable("miscfeatures.config.max_entity_search_radius.normal_cap.tooltip", Config.ABSOLUTE_MAX_SEARCH_RADIUS)
                         )
                         .setSaveConsumer(config::setMaxEntitySearchRadius)
                         .build());
@@ -296,7 +296,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.label"),
                             config.shouldSearchEntitiesInUnloadedChunks()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_SEARCH_ENTITIES_IN_UNLOADED_CHUNKS)
+                    .setDefaultValue(Config.DEFAULT_SEARCH_ENTITIES_IN_UNLOADED_CHUNKS)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.tooltip.entity.1"),
                             Component.translatable("miscfeatures.config.search_unloaded_chunks.tooltip.entity.2")
@@ -308,7 +308,7 @@ public class MiscFeaturesModMenu implements ModMenuApi {
                             Component.translatable("miscfeatures.config.max_find_entity_results.label"),
                             config.getMaxFindEntityResults()
                     )
-                    .setDefaultValue(MiscFeaturesConfig.DEFAULT_MAX_FIND_ENTITY_RESULTS)
+                    .setDefaultValue(Config.DEFAULT_MAX_FIND_ENTITY_RESULTS)
                     .setMin(1)
                     .setTooltip(
                             Component.translatable("miscfeatures.config.max_find_entity_results.tooltip.1"),

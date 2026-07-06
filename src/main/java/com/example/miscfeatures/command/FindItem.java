@@ -1,7 +1,7 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.MiscFeaturesMod;
-import com.example.miscfeatures.config.MiscFeaturesConfig;
+import com.example.miscfeatures.MiscFeatures;
+import com.example.miscfeatures.config.Config;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -34,7 +34,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-public final class FindItemCommand {
+public final class FindItem {
 
     private static final String FIND_ITEM_USAGE = "/find item <radius> <item|#tag> [more items/tags] [--sort=distance|alphabetic|chunk] [--page=1] [--limit=25] [--loaded-only] [--include-shulker|--exclude-shulker]";
     private static final List<String> FLAG_SUGGESTIONS = List.of(
@@ -48,7 +48,7 @@ public final class FindItemCommand {
             "--exclude-shulker"
     );
 
-    private FindItemCommand() {
+    private FindItem() {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -57,8 +57,8 @@ public final class FindItemCommand {
                 .then(Commands.literal("item")
                     .then(Commands.argument("radius", IntegerArgumentType.integer(1))
                         .then(Commands.argument("items", StringArgumentType.greedyString())
-                            .suggests(FindItemCommand::suggestItems)
-                            .executes(FindItemCommand::execute))))
+                            .suggests(FindItem::suggestItems)
+                            .executes(FindItem::execute))))
         );
     }
 
@@ -70,13 +70,13 @@ public final class FindItemCommand {
         BuiltInRegistries.ITEM.keySet().stream().map(Identifier::toString).forEach(suggestions::add);
         BuiltInRegistries.ITEM.getTags().map(named -> "#" + named.key().location()).forEach(suggestions::add);
         suggestions.addAll(FLAG_SUGGESTIONS);
-        return AreaCommandSupport.suggestTokenList(builder, suggestions.stream());
+        return AreaSupport.suggestTokenList(builder, suggestions.stream());
     }
 
     private static int execute(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
         int radius = IntegerArgumentType.getInteger(context, "radius");
-        MiscFeaturesConfig config = MiscFeaturesConfig.getInstance();
+        Config config = Config.getInstance();
         int maxRadius = config.getMaxItemSearchRadius();
         int maxResults = config.getMaxFindItemResults();
         boolean searchUnloadedChunks = config.shouldSearchItemsInUnloadedChunks();
@@ -86,11 +86,11 @@ public final class FindItemCommand {
         int requestedLimit = maxResults;
         String input = StringArgumentType.getString(context, "items");
 
-        if (!AreaCommandSupport.validateRadius(source, radius, maxRadius, "maxItemSearchRadius")) {
+        if (!AreaSupport.validateRadius(source, radius, maxRadius, "maxItemSearchRadius")) {
             return 0;
         }
 
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
             "Running /find item with radius={} searchUnloadedChunks={} rawTargets='{}'",
                 radius,
                 searchUnloadedChunks,
@@ -101,7 +101,7 @@ public final class FindItemCommand {
         Map<Item, Set<ItemSearchTarget>> targetIndex = new HashMap<>();
         List<String> unknownTokens = new ArrayList<>();
 
-        for (String token : AreaCommandSupport.tokenizeTargets(input)) {
+        for (String token : AreaSupport.tokenizeTargets(input)) {
             if (token.isEmpty()) {
                 continue;
             }
@@ -131,7 +131,7 @@ public final class FindItemCommand {
                 continue;
             }
 
-            Integer parsedPage = AreaCommandSupport.parsePositiveIntFlag(token, "--page=");
+            Integer parsedPage = AreaSupport.parsePositiveIntFlag(token, "--page=");
             if (token.toLowerCase().startsWith("--page=")) {
                 if (parsedPage == null) {
                     unknownTokens.add(token);
@@ -141,7 +141,7 @@ public final class FindItemCommand {
                 continue;
             }
 
-            Integer parsedLimit = AreaCommandSupport.parsePositiveIntFlag(token, "--limit=");
+            Integer parsedLimit = AreaSupport.parsePositiveIntFlag(token, "--limit=");
             if (token.toLowerCase().startsWith("--limit=")) {
                 if (parsedLimit == null) {
                     unknownTokens.add(token);
@@ -159,7 +159,7 @@ public final class FindItemCommand {
         int pageLimit = Math.max(1, Math.min(maxResults, requestedLimit));
 
         for (String unknown : unknownTokens) {
-            source.sendFailure(AreaCommandSupport.getUnknownItemError(unknown));
+            source.sendFailure(AreaSupport.getUnknownItemError(unknown));
         }
 
         if (targets.isEmpty()) {
@@ -169,7 +169,7 @@ public final class FindItemCommand {
             return 0;
         }
 
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
                 "Indexed {} unique item targets across {} unique items",
                 targets.size(),
                 targetIndex.size()
@@ -182,7 +182,7 @@ public final class FindItemCommand {
         ServerLevel level = source.getLevel();
         BlockPos center = BlockPos.containing(source.getPosition());
         source.sendSuccess(() -> Component.literal(
-                "§7Searching containers in " + AreaCommandSupport.cubeWidth(radius) + "³ blocks around ["
+                "§7Searching containers in " + AreaSupport.cubeWidth(radius) + "³ blocks around ["
                         + center.getX() + ", " + center.getY() + ", " + center.getZ() + "]…"
         ), false);
 
@@ -195,7 +195,7 @@ public final class FindItemCommand {
             containerCounts.put(target, 0L);
         }
 
-        AreaCommandSupport.forEachBlockInCube(level, center, radius, searchUnloadedChunksFinal, pos -> {
+        AreaSupport.forEachBlockInCube(level, center, radius, searchUnloadedChunksFinal, pos -> {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity == null || !(blockEntity instanceof Container container)) {
                 return;
@@ -279,12 +279,12 @@ public final class FindItemCommand {
 
                 for (ContainerMatch match : pagedMatches) {
                 source.sendSuccess(() -> Component.literal("  " + match.containerName() + " x" + match.itemCount() + " at ")
-                        .append(AreaCommandSupport.createCoordinateComponent(match.pos())), false);
+                        .append(AreaSupport.createCoordinateComponent(match.pos())), false);
             }
         }
 
         int finalTotal = grandTotal;
-        MiscFeaturesMod.verbose(
+        MiscFeatures.verbose(
                 "Find item complete with {} total item matches across {} targets",
                 finalTotal,
                 targets.size()
