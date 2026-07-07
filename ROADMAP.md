@@ -1,3 +1,4 @@
+The items outlined in the roadmap are not the only things that may be changed in a future update.
 
 ## Version 0.1.4
 
