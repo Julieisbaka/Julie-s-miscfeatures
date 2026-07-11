@@ -13,7 +13,7 @@ Features
 
 This mod **DOES** require the [Fabric API](https://modrinth.com/mod/fabric-api).
 
-While it is optional, I would also suggest [Mod Menu](https://modrinth.com/mod/mod-menu) because it makes configuring the mod a lot easier. (And just between you and me, I might occasionally add a setting to Mod Menu and forget to add it to the chat-based configuration for a few days, which means you potentially get access to features sooner if you have Mod Menu installed.)
+While it is optional, I would also suggest [Mod Menu](https://modrinth.com/mod/modmenu) because it makes configuring the mod a lot easier. (And just between you and me, I might occasionally add a setting to Mod Menu and forget to add it to the chat-based configuration for a few days, which means you potentially get access to features sooner if you have Mod Menu installed.)
 
 ## Server Use
 
