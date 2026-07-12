@@ -213,7 +213,7 @@ public final class FindEntity {
             }
         }
 
-        int grandTotal = 0;
+        long grandTotal = 0L;
         for (Map.Entry<EntitySearchTarget, List<EntityMatch>> entry : results.entrySet()) {
             EntitySearchTarget target = entry.getKey();
             List<EntityMatch> matches = entry.getValue();
