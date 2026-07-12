@@ -204,7 +204,7 @@ public class FindBlock {
             }
         });
 
-        int grandTotal = 0;
+        long grandTotal = 0L;
         for (Map.Entry<SearchTarget, List<BlockPos>> entry : results.entrySet()) {
             SearchTarget target = entry.getKey();
             List<BlockPos> positions = entry.getValue();
