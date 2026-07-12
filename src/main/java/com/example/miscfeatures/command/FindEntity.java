@@ -252,7 +252,7 @@ public final class FindEntity {
             }
         }
 
-        int finalTotal = grandTotal;
+        int finalTotal = (int) Math.min(grandTotal, Integer.MAX_VALUE);
         MiscFeatures.verbose(
                 "Find entity complete with {} total matches across {} targets",
                 finalTotal,
