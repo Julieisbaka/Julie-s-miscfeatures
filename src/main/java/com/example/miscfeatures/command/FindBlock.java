@@ -242,7 +242,7 @@ public class FindBlock {
             }
         }
 
-        int finalTotal = grandTotal;
+        int finalTotal = (int) Math.min(grandTotal, Integer.MAX_VALUE);
         MiscFeatures.verbose(
             "Search complete with {} total matches across {} targets",
             finalTotal,
