@@ -241,7 +241,7 @@ public final class FindItem {
             }
         });
 
-        int grandTotal = 0;
+        long grandTotal = 0L;
         for (Map.Entry<ItemSearchTarget, List<ContainerMatch>> entry : results.entrySet()) {
             ItemSearchTarget target = entry.getKey();
             List<ContainerMatch> matches = entry.getValue();
