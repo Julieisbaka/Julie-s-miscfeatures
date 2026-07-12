@@ -282,7 +282,7 @@ public final class FindItem {
             }
         }
 
-        int finalTotal = grandTotal;
+        int finalTotal = (int) Math.min(grandTotal, Integer.MAX_VALUE);
         MiscFeatures.verbose(
                 "Find item complete with {} total item matches across {} targets",
                 finalTotal,
