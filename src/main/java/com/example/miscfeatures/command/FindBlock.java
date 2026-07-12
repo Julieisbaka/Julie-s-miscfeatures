@@ -242,6 +242,7 @@ public class FindBlock {
             }
         }
 
+        // Saturates at Integer.MAX_VALUE; totals exceeding int range are clamped, not truncated.
         int finalTotal = (int) Math.min(grandTotal, Integer.MAX_VALUE);
         MiscFeatures.verbose(
             "Search complete with {} total matches across {} targets",
