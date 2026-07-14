@@ -241,7 +241,7 @@ public final class FindItem {
             }
         });
 
-        int grandTotal = 0;
+        long grandTotal = 0L;
         for (Map.Entry<ItemSearchTarget, List<ContainerMatch>> entry : results.entrySet()) {
             ItemSearchTarget target = entry.getKey();
             List<ContainerMatch> matches = entry.getValue();
@@ -282,7 +282,8 @@ public final class FindItem {
             }
         }
 
-        int finalTotal = grandTotal;
+        // Saturates at Integer.MAX_VALUE; totals exceeding int range are clamped, not truncated.
+        int finalTotal = (int) Math.min(grandTotal, Integer.MAX_VALUE);
         MiscFeatures.verbose(
                 "Find item complete with {} total item matches across {} targets",
                 finalTotal,

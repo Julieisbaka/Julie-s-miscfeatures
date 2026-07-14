@@ -204,7 +204,7 @@ public class FindBlock {
             }
         });
 
-        int grandTotal = 0;
+        long grandTotal = 0L;
         for (Map.Entry<SearchTarget, List<BlockPos>> entry : results.entrySet()) {
             SearchTarget target = entry.getKey();
             List<BlockPos> positions = entry.getValue();
@@ -242,7 +242,8 @@ public class FindBlock {
             }
         }
 
-        int finalTotal = grandTotal;
+        // Saturates at Integer.MAX_VALUE; totals exceeding int range are clamped, not truncated.
+        int finalTotal = (int) Math.min(grandTotal, Integer.MAX_VALUE);
         MiscFeatures.verbose(
             "Search complete with {} total matches across {} targets",
             finalTotal,

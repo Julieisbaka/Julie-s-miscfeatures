@@ -213,7 +213,7 @@ public final class FindEntity {
             }
         }
 
-        int grandTotal = 0;
+        long grandTotal = 0L;
         for (Map.Entry<EntitySearchTarget, List<EntityMatch>> entry : results.entrySet()) {
             EntitySearchTarget target = entry.getKey();
             List<EntityMatch> matches = entry.getValue();
@@ -252,7 +252,8 @@ public final class FindEntity {
             }
         }
 
-        int finalTotal = grandTotal;
+        // Saturates at Integer.MAX_VALUE; totals exceeding int range are clamped, not truncated.
+        int finalTotal = (int) Math.min(grandTotal, Integer.MAX_VALUE);
         MiscFeatures.verbose(
                 "Find entity complete with {} total matches across {} targets",
                 finalTotal,
