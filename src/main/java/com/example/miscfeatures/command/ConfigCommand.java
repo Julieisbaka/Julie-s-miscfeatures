@@ -15,41 +15,16 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 
 public final class ConfigCommand {
 
-    private static final List<String> SETTING_KEYS = List.of(
-            "maxSearchRadius",
-            "maxItemSearchRadius",
-            "maxEntitySearchRadius",
-            "maxSearchResults",
-            "maxFindItemResults",
-            "maxFindEntityResults",
-            "searchUnloadedChunks",
-            "searchItemsInUnloadedChunks",
-            "searchEntitiesInUnloadedChunks",
-            "developerMode",
-            "verboseLogging",
-            "anvilAutoInsertArmor",
-            "anvilAutoInsertWeapons",
-            "anvilAutoInsertNameTags",
-            "allowNegativeEnchants",
-            "allowHighLevelEnchants",
-            "requireConfirmForUnsafeEnchants",
-            "requireConfirmForNegativeEnchants",
-            "negativeEnchantConfirmWindowSeconds",
-            "requirePermissionForEnchant",
-            "enchantPermissionLevel",
-            "requirePermissionForAnvil",
-            "anvilPermissionLevel",
-            "preventCreativePacketCrashOnUnsafeEnchants",
-            "preventCreativePacketCrashOnNegativeEnchants",
-            "fixHighLevelEnchantText",
-            "highLevelEnchantStyleRoman"
-    );
+    private static final List<String> SETTING_KEYS = Arrays.stream(SettingKey.values())
+        .map(SettingKey::key)
+        .toList();
 
     private ConfigCommand() {
     }
@@ -83,15 +58,33 @@ public final class ConfigCommand {
             CommandContext<CommandSourceStack> context,
             SuggestionsBuilder builder
     ) {
-        String setting = StringArgumentType.getString(context, "setting").toLowerCase(Locale.ROOT);
+        SettingKey setting = SettingKey.fromInput(StringArgumentType.getString(context, "setting"));
+        if (setting == null) {
+            return Suggestions.empty();
+        }
+
         return switch (setting) {
-            case "searchunloadedchunks", "searchitemsinunloadedchunks", "searchentitiesinunloadedchunks",
-                 "developermode", "verboselogging", "anvilautoinsertarmor", "anvilautoinsertweapons",
-                 "anvilautoinsertnametags", "allownegativeenchants", "allowhighlevelenchants", "requireconfirmforunsafeenchants", "requireconfirmfornegativeenchants",
-                "requirepermissionforenchant", "requirepermissionforanvil", "preventcreativepacketcrashonunsafeenchants", "preventcreativepacketcrashonnegativeenchants", "fixhighlevelenchanttext",
-                 "highlevelenchantstyleroman" -> SharedSuggestionProvider.suggest(List.of("true", "false"), builder);
-            case "enchantpermissionlevel", "anvilpermissionlevel" -> SharedSuggestionProvider.suggest(List.of("0", "1", "2", "3", "4"), builder);
-            case "negativeenchantconfirmwindowseconds" -> SharedSuggestionProvider.suggest(List.of("5", "10", "15"), builder);
+            case SEARCH_UNLOADED_CHUNKS,
+                 SEARCH_ITEMS_IN_UNLOADED_CHUNKS,
+                 SEARCH_ENTITIES_IN_UNLOADED_CHUNKS,
+                 DEVELOPER_MODE,
+                 VERBOSE_LOGGING,
+                 ANVIL_AUTO_INSERT_ARMOR,
+                 ANVIL_AUTO_INSERT_WEAPONS,
+                 ANVIL_AUTO_INSERT_NAME_TAGS,
+                 ALLOW_NEGATIVE_ENCHANTS,
+                 ALLOW_HIGH_LEVEL_ENCHANTS,
+                 REQUIRE_CONFIRM_FOR_UNSAFE_ENCHANTS,
+                 REQUIRE_CONFIRM_FOR_NEGATIVE_ENCHANTS,
+                 REQUIRE_PERMISSION_FOR_ENCHANT,
+                 REQUIRE_PERMISSION_FOR_ANVIL,
+                 PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS,
+                 PREVENT_CREATIVE_PACKET_CRASH_ON_NEGATIVE_ENCHANTS,
+                 FIX_HIGH_LEVEL_ENCHANT_TEXT,
+                 HIGH_LEVEL_ENCHANT_STYLE_ROMAN -> SharedSuggestionProvider.suggest(List.of("true", "false"), builder);
+            case ENCHANT_PERMISSION_LEVEL,
+                 ANVIL_PERMISSION_LEVEL -> SharedSuggestionProvider.suggest(List.of("0", "1", "2", "3", "4"), builder);
+            case NEGATIVE_ENCHANT_CONFIRM_WINDOW_SECONDS -> SharedSuggestionProvider.suggest(List.of("5", "10", "15"), builder);
             default -> Suggestions.empty();
         };
     }
@@ -199,75 +192,68 @@ public final class ConfigCommand {
 
     private static int setSetting(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         String rawSetting = StringArgumentType.getString(context, "setting");
-        String setting = rawSetting.toLowerCase(Locale.ROOT);
+        SettingKey setting = SettingKey.fromInput(rawSetting);
         String value = StringArgumentType.getString(context, "value");
         Config config = Config.getInstance();
 
+        if (setting == null) {
+            context.getSource().sendFailure(Component.literal(
+                    "Unknown config setting: " + rawSetting + ". Use /mf config show to list valid settings."
+            ));
+            return 0;
+        }
+
         switch (setting) {
-            case "maxsearchradius" -> config.setMaxSearchRadius(parseInt(value, rawSetting));
-            case "maxitemsearchradius" -> config.setMaxItemSearchRadius(parseInt(value, rawSetting));
-            case "maxentitysearchradius" -> config.setMaxEntitySearchRadius(parseInt(value, rawSetting));
-            case "maxsearchresults" -> config.setMaxSearchResults(parseInt(value, rawSetting));
-            case "maxfinditemresults" -> config.setMaxFindItemResults(parseInt(value, rawSetting));
-            case "maxfindentityresults" -> config.setMaxFindEntityResults(parseInt(value, rawSetting));
-            case "searchunloadedchunks" -> config.setSearchUnloadedChunks(parseBoolean(value, rawSetting));
-            case "searchitemsinunloadedchunks" -> config.setSearchItemsInUnloadedChunks(parseBoolean(value, rawSetting));
-            case "searchentitiesinunloadedchunks" -> config.setSearchEntitiesInUnloadedChunks(parseBoolean(value, rawSetting));
-            case "developermode" -> config.setDeveloperMode(parseBoolean(value, rawSetting));
-            case "verboselogging" -> {
+            case MAX_SEARCH_RADIUS -> config.setMaxSearchRadius(parseInt(value, rawSetting));
+            case MAX_ITEM_SEARCH_RADIUS -> config.setMaxItemSearchRadius(parseInt(value, rawSetting));
+            case MAX_ENTITY_SEARCH_RADIUS -> config.setMaxEntitySearchRadius(parseInt(value, rawSetting));
+            case MAX_SEARCH_RESULTS -> config.setMaxSearchResults(parseInt(value, rawSetting));
+            case MAX_FIND_ITEM_RESULTS -> config.setMaxFindItemResults(parseInt(value, rawSetting));
+            case MAX_FIND_ENTITY_RESULTS -> config.setMaxFindEntityResults(parseInt(value, rawSetting));
+            case SEARCH_UNLOADED_CHUNKS -> config.setSearchUnloadedChunks(parseBoolean(value, rawSetting));
+            case SEARCH_ITEMS_IN_UNLOADED_CHUNKS -> config.setSearchItemsInUnloadedChunks(parseBoolean(value, rawSetting));
+            case SEARCH_ENTITIES_IN_UNLOADED_CHUNKS -> config.setSearchEntitiesInUnloadedChunks(parseBoolean(value, rawSetting));
+            case DEVELOPER_MODE -> config.setDeveloperMode(parseBoolean(value, rawSetting));
+            case VERBOSE_LOGGING -> {
                 boolean parsed = parseBoolean(value, rawSetting);
                 if (parsed && !config.isDeveloperMode()) {
                     throw new CommandSyntaxException(null, Component.literal("misc-features: enable developerMode before turning on verboseLogging."));
                 }
                 config.setVerboseLogging(parsed);
             }
-            case "anvilautoinsertarmor" -> config.setAnvilAutoInsertArmor(parseBoolean(value, rawSetting));
-            case "anvilautoinsertweapons" -> config.setAnvilAutoInsertWeapons(parseBoolean(value, rawSetting));
-            case "anvilautoinsertnametags" -> config.setAnvilAutoInsertNameTags(parseBoolean(value, rawSetting));
-            case "allownegativeenchants" -> {
+            case ANVIL_AUTO_INSERT_ARMOR -> config.setAnvilAutoInsertArmor(parseBoolean(value, rawSetting));
+            case ANVIL_AUTO_INSERT_WEAPONS -> config.setAnvilAutoInsertWeapons(parseBoolean(value, rawSetting));
+            case ANVIL_AUTO_INSERT_NAME_TAGS -> config.setAnvilAutoInsertNameTags(parseBoolean(value, rawSetting));
+            case ALLOW_NEGATIVE_ENCHANTS -> {
                 boolean parsed = parseBoolean(value, rawSetting);
                 if (parsed && !config.isDeveloperMode()) {
                     throw new CommandSyntaxException(null, Component.literal("misc-features: enable developerMode before turning on allowNegativeEnchants."));
                 }
                 config.setAllowNegativeEnchants(parsed);
             }
-            case "allowhighlevelenchants" -> {
+            case ALLOW_HIGH_LEVEL_ENCHANTS -> {
                 boolean parsed = parseBoolean(value, rawSetting);
                 if (parsed && !config.isDeveloperMode()) {
                     throw new CommandSyntaxException(null, Component.literal("misc-features: enable developerMode before turning on allowHighLevelEnchants."));
                 }
                 config.setAllowHighLevelEnchants(parsed);
             }
-            case "requireconfirmforunsafeenchants" -> config.setRequireConfirmForUnsafeEnchants(parseBoolean(value, rawSetting));
-            case "requireconfirmfornegativeenchants" -> config.setRequireConfirmForNegativeEnchants(parseBoolean(value, rawSetting));
-            case "negativeenchantconfirmwindowseconds" -> config.setNegativeEnchantConfirmWindowSeconds(parseInt(value, rawSetting));
-            case "requirepermissionforenchant" -> config.setRequirePermissionForEnchant(parseBoolean(value, rawSetting));
-            case "enchantpermissionlevel" -> config.setEnchantPermissionLevel(parseInt(value, rawSetting));
-            case "requirepermissionforanvil" -> config.setRequirePermissionForAnvil(parseBoolean(value, rawSetting));
-            case "anvilpermissionlevel" -> config.setAnvilPermissionLevel(parseInt(value, rawSetting));
-            case "preventcreativepacketcrashonunsafeenchants" -> config.setPreventCreativePacketCrashOnUnsafeEnchants(parseBoolean(value, rawSetting));
-            case "preventcreativepacketcrashonnegativeenchants" -> config.setPreventCreativePacketCrashOnUnsafeEnchants(parseBoolean(value, rawSetting));
-            case "fixhighlevelenchanttext" -> config.setFixHighLevelEnchantText(parseBoolean(value, rawSetting));
-            case "highlevelenchantstyleroman" -> config.setHighLevelEnchantStyleRoman(parseBoolean(value, rawSetting));
-            default -> {
-                context.getSource().sendFailure(Component.literal(
-                        "Unknown config setting: " + rawSetting + ". Use /mf config show to list valid settings."
-                ));
-                return 0;
-            }
+            case REQUIRE_CONFIRM_FOR_UNSAFE_ENCHANTS -> config.setRequireConfirmForUnsafeEnchants(parseBoolean(value, rawSetting));
+            case REQUIRE_CONFIRM_FOR_NEGATIVE_ENCHANTS -> config.setRequireConfirmForNegativeEnchants(parseBoolean(value, rawSetting));
+            case NEGATIVE_ENCHANT_CONFIRM_WINDOW_SECONDS -> config.setNegativeEnchantConfirmWindowSeconds(parseInt(value, rawSetting));
+            case REQUIRE_PERMISSION_FOR_ENCHANT -> config.setRequirePermissionForEnchant(parseBoolean(value, rawSetting));
+            case ENCHANT_PERMISSION_LEVEL -> config.setEnchantPermissionLevel(parseInt(value, rawSetting));
+            case REQUIRE_PERMISSION_FOR_ANVIL -> config.setRequirePermissionForAnvil(parseBoolean(value, rawSetting));
+            case ANVIL_PERMISSION_LEVEL -> config.setAnvilPermissionLevel(parseInt(value, rawSetting));
+            case PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS,
+                 PREVENT_CREATIVE_PACKET_CRASH_ON_NEGATIVE_ENCHANTS -> config.setPreventCreativePacketCrashOnUnsafeEnchants(parseBoolean(value, rawSetting));
+            case FIX_HIGH_LEVEL_ENCHANT_TEXT -> config.setFixHighLevelEnchantText(parseBoolean(value, rawSetting));
+            case HIGH_LEVEL_ENCHANT_STYLE_ROMAN -> config.setHighLevelEnchantStyleRoman(parseBoolean(value, rawSetting));
         }
 
         config.save();
 
-        if (setting.equals("developermode")
-                || setting.equals("allownegativeenchants")
-                || setting.equals("allowhighlevelenchants")
-                || setting.equals("requirepermissionforenchant")
-                || setting.equals("enchantpermissionlevel")
-                || setting.equals("requirepermissionforanvil")
-                || setting.equals("anvilpermissionlevel")
-                || setting.equals("preventcreativepacketcrashonunsafeenchants")
-                || setting.equals("preventcreativepacketcrashonnegativeenchants")) {
+        if (requiresCommandRefresh(setting)) {
             refreshCommands(context.getSource());
         }
 
@@ -275,13 +261,13 @@ public final class ConfigCommand {
                 "misc-features: " + rawSetting + " set to " + getCurrentValue(config, setting)
         ), true);
 
-        if (setting.equals("allownegativeenchants") && config.shouldAllowNegativeEnchants()) {
+        if (setting == SettingKey.ALLOW_NEGATIVE_ENCHANTS && config.shouldAllowNegativeEnchants()) {
             context.getSource().sendSuccess(() -> Component.literal(
                     "§6Warning: unsafe enchant levels are unstable developer behavior and can crash server/client or corrupt inventory data."
             ), false);
         }
 
-        if (setting.equals("allowhighlevelenchants") && config.shouldAllowHighLevelEnchants()) {
+        if (setting == SettingKey.ALLOW_HIGH_LEVEL_ENCHANTS && config.shouldAllowHighLevelEnchants()) {
             context.getSource().sendSuccess(() -> Component.literal(
                 "§6Warning: unsafe enchant levels are unstable developer behavior and can crash server/client or corrupt inventory data."
             ), false);
@@ -290,34 +276,50 @@ public final class ConfigCommand {
         return 1;
     }
 
-    private static String getCurrentValue(Config config, String normalizedSetting) {
-        return switch (normalizedSetting) {
-            case "maxsearchradius" -> String.valueOf(config.getMaxSearchRadius());
-            case "maxitemsearchradius" -> String.valueOf(config.getMaxItemSearchRadius());
-            case "maxentitysearchradius" -> String.valueOf(config.getMaxEntitySearchRadius());
-            case "maxsearchresults" -> String.valueOf(config.getMaxSearchResults());
-            case "maxfinditemresults" -> String.valueOf(config.getMaxFindItemResults());
-            case "maxfindentityresults" -> String.valueOf(config.getMaxFindEntityResults());
-            case "searchunloadedchunks" -> String.valueOf(config.shouldSearchUnloadedChunks());
-            case "searchitemsinunloadedchunks" -> String.valueOf(config.shouldSearchItemsInUnloadedChunks());
-            case "searchentitiesinunloadedchunks" -> String.valueOf(config.shouldSearchEntitiesInUnloadedChunks());
-            case "developermode" -> String.valueOf(config.isDeveloperMode());
-            case "verboselogging" -> String.valueOf(config.isVerboseLogging());
-            case "anvilautoinsertarmor" -> String.valueOf(config.shouldAnvilAutoInsertArmor());
-            case "anvilautoinsertweapons" -> String.valueOf(config.shouldAnvilAutoInsertWeapons());
-            case "anvilautoinsertnametags" -> String.valueOf(config.shouldAnvilAutoInsertNameTags());
-            case "allownegativeenchants" -> String.valueOf(config.shouldAllowNegativeEnchants());
-            case "allowhighlevelenchants" -> String.valueOf(config.shouldAllowHighLevelEnchants());
-            case "requireconfirmforunsafeenchants", "requireconfirmfornegativeenchants" -> String.valueOf(config.shouldRequireConfirmForUnsafeEnchants());
-            case "negativeenchantconfirmwindowseconds" -> String.valueOf(config.getNegativeEnchantConfirmWindowSeconds());
-            case "requirepermissionforenchant" -> String.valueOf(config.shouldRequirePermissionForEnchant());
-            case "enchantpermissionlevel" -> String.valueOf(config.getEnchantPermissionLevel());
-            case "requirepermissionforanvil" -> String.valueOf(config.shouldRequirePermissionForAnvil());
-            case "anvilpermissionlevel" -> String.valueOf(config.getAnvilPermissionLevel());
-            case "preventcreativepacketcrashonunsafeenchants", "preventcreativepacketcrashonnegativeenchants" -> String.valueOf(config.shouldPreventCreativePacketCrashOnUnsafeEnchants());
-            case "fixhighlevelenchanttext" -> String.valueOf(config.shouldFixHighLevelEnchantText());
-            case "highlevelenchantstyleroman" -> String.valueOf(config.shouldUseRomanForHighLevelEnchantText());
-            default -> "?";
+    private static String getCurrentValue(Config config, SettingKey setting) {
+        return switch (setting) {
+            case MAX_SEARCH_RADIUS -> String.valueOf(config.getMaxSearchRadius());
+            case MAX_ITEM_SEARCH_RADIUS -> String.valueOf(config.getMaxItemSearchRadius());
+            case MAX_ENTITY_SEARCH_RADIUS -> String.valueOf(config.getMaxEntitySearchRadius());
+            case MAX_SEARCH_RESULTS -> String.valueOf(config.getMaxSearchResults());
+            case MAX_FIND_ITEM_RESULTS -> String.valueOf(config.getMaxFindItemResults());
+            case MAX_FIND_ENTITY_RESULTS -> String.valueOf(config.getMaxFindEntityResults());
+            case SEARCH_UNLOADED_CHUNKS -> String.valueOf(config.shouldSearchUnloadedChunks());
+            case SEARCH_ITEMS_IN_UNLOADED_CHUNKS -> String.valueOf(config.shouldSearchItemsInUnloadedChunks());
+            case SEARCH_ENTITIES_IN_UNLOADED_CHUNKS -> String.valueOf(config.shouldSearchEntitiesInUnloadedChunks());
+            case DEVELOPER_MODE -> String.valueOf(config.isDeveloperMode());
+            case VERBOSE_LOGGING -> String.valueOf(config.isVerboseLogging());
+            case ANVIL_AUTO_INSERT_ARMOR -> String.valueOf(config.shouldAnvilAutoInsertArmor());
+            case ANVIL_AUTO_INSERT_WEAPONS -> String.valueOf(config.shouldAnvilAutoInsertWeapons());
+            case ANVIL_AUTO_INSERT_NAME_TAGS -> String.valueOf(config.shouldAnvilAutoInsertNameTags());
+            case ALLOW_NEGATIVE_ENCHANTS -> String.valueOf(config.shouldAllowNegativeEnchants());
+            case ALLOW_HIGH_LEVEL_ENCHANTS -> String.valueOf(config.shouldAllowHighLevelEnchants());
+            case REQUIRE_CONFIRM_FOR_UNSAFE_ENCHANTS,
+                 REQUIRE_CONFIRM_FOR_NEGATIVE_ENCHANTS -> String.valueOf(config.shouldRequireConfirmForUnsafeEnchants());
+            case NEGATIVE_ENCHANT_CONFIRM_WINDOW_SECONDS -> String.valueOf(config.getNegativeEnchantConfirmWindowSeconds());
+            case REQUIRE_PERMISSION_FOR_ENCHANT -> String.valueOf(config.shouldRequirePermissionForEnchant());
+            case ENCHANT_PERMISSION_LEVEL -> String.valueOf(config.getEnchantPermissionLevel());
+            case REQUIRE_PERMISSION_FOR_ANVIL -> String.valueOf(config.shouldRequirePermissionForAnvil());
+            case ANVIL_PERMISSION_LEVEL -> String.valueOf(config.getAnvilPermissionLevel());
+            case PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS,
+                 PREVENT_CREATIVE_PACKET_CRASH_ON_NEGATIVE_ENCHANTS -> String.valueOf(config.shouldPreventCreativePacketCrashOnUnsafeEnchants());
+            case FIX_HIGH_LEVEL_ENCHANT_TEXT -> String.valueOf(config.shouldFixHighLevelEnchantText());
+            case HIGH_LEVEL_ENCHANT_STYLE_ROMAN -> String.valueOf(config.shouldUseRomanForHighLevelEnchantText());
+        };
+    }
+
+    private static boolean requiresCommandRefresh(SettingKey setting) {
+        return switch (setting) {
+            case DEVELOPER_MODE,
+                 ALLOW_NEGATIVE_ENCHANTS,
+                 ALLOW_HIGH_LEVEL_ENCHANTS,
+                 REQUIRE_PERMISSION_FOR_ENCHANT,
+                 ENCHANT_PERMISSION_LEVEL,
+                 REQUIRE_PERMISSION_FOR_ANVIL,
+                 ANVIL_PERMISSION_LEVEL,
+                 PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS,
+                 PREVENT_CREATIVE_PACKET_CRASH_ON_NEGATIVE_ENCHANTS -> true;
+            default -> false;
         };
     }
 
@@ -354,6 +356,58 @@ public final class ConfigCommand {
 
         for (ServerPlayer player : source.getServer().getPlayerList().getPlayers()) {
             source.getServer().getCommands().sendCommands(player);
+        }
+    }
+
+    private enum SettingKey {
+        MAX_SEARCH_RADIUS("maxSearchRadius"),
+        MAX_ITEM_SEARCH_RADIUS("maxItemSearchRadius"),
+        MAX_ENTITY_SEARCH_RADIUS("maxEntitySearchRadius"),
+        MAX_SEARCH_RESULTS("maxSearchResults"),
+        MAX_FIND_ITEM_RESULTS("maxFindItemResults"),
+        MAX_FIND_ENTITY_RESULTS("maxFindEntityResults"),
+        SEARCH_UNLOADED_CHUNKS("searchUnloadedChunks"),
+        SEARCH_ITEMS_IN_UNLOADED_CHUNKS("searchItemsInUnloadedChunks"),
+        SEARCH_ENTITIES_IN_UNLOADED_CHUNKS("searchEntitiesInUnloadedChunks"),
+        DEVELOPER_MODE("developerMode"),
+        VERBOSE_LOGGING("verboseLogging"),
+        ANVIL_AUTO_INSERT_ARMOR("anvilAutoInsertArmor"),
+        ANVIL_AUTO_INSERT_WEAPONS("anvilAutoInsertWeapons"),
+        ANVIL_AUTO_INSERT_NAME_TAGS("anvilAutoInsertNameTags"),
+        ALLOW_NEGATIVE_ENCHANTS("allowNegativeEnchants"),
+        ALLOW_HIGH_LEVEL_ENCHANTS("allowHighLevelEnchants"),
+        REQUIRE_CONFIRM_FOR_UNSAFE_ENCHANTS("requireConfirmForUnsafeEnchants"),
+        REQUIRE_CONFIRM_FOR_NEGATIVE_ENCHANTS("requireConfirmForNegativeEnchants"),
+        NEGATIVE_ENCHANT_CONFIRM_WINDOW_SECONDS("negativeEnchantConfirmWindowSeconds"),
+        REQUIRE_PERMISSION_FOR_ENCHANT("requirePermissionForEnchant"),
+        ENCHANT_PERMISSION_LEVEL("enchantPermissionLevel"),
+        REQUIRE_PERMISSION_FOR_ANVIL("requirePermissionForAnvil"),
+        ANVIL_PERMISSION_LEVEL("anvilPermissionLevel"),
+        PREVENT_CREATIVE_PACKET_CRASH_ON_UNSAFE_ENCHANTS("preventCreativePacketCrashOnUnsafeEnchants"),
+        PREVENT_CREATIVE_PACKET_CRASH_ON_NEGATIVE_ENCHANTS("preventCreativePacketCrashOnNegativeEnchants"),
+        FIX_HIGH_LEVEL_ENCHANT_TEXT("fixHighLevelEnchantText"),
+        HIGH_LEVEL_ENCHANT_STYLE_ROMAN("highLevelEnchantStyleRoman");
+
+        private final String key;
+        private final String normalized;
+
+        SettingKey(String key) {
+            this.key = key;
+            this.normalized = key.toLowerCase(Locale.ROOT);
+        }
+
+        private String key() {
+            return key;
+        }
+
+        private static SettingKey fromInput(String key) {
+            String normalizedInput = key.toLowerCase(Locale.ROOT);
+            for (SettingKey setting : values()) {
+                if (setting.normalized.equals(normalizedInput)) {
+                    return setting;
+                }
+            }
+            return null;
         }
     }
 }
