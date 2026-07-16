@@ -22,9 +22,13 @@ The items outlined in the roadmap are not the only things that may be changed in
 
 ## Version 0.0.9
 
+- Bug fixes
+
+## Version 0.0.8
+
 - Internal changes to prepare for version 0.1.0
 
-## Versions 0.0.7 and 0.0.8
+## Versions 0.0.7
 
 - Find command performance optimizations
 - Bug fixes
