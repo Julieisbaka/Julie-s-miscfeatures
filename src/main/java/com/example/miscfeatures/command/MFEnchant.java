@@ -29,6 +29,8 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.jspecify.annotations.NonNull;
+
 public final class MFEnchant {
 
         private static final Map<String, PendingUnsafeEnchant> PENDING_UNSAFE_CONFIRMATIONS = new ConcurrentHashMap<>();
@@ -37,7 +39,7 @@ public final class MFEnchant {
     private MFEnchant() {
     }
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext buildContext) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, @NonNull     CommandBuildContext buildContext) {
         registerCleanupHookIfNeeded();
         dispatcher.register(buildRootLiteral("miscfeatures", buildContext));
         dispatcher.register(buildRootLiteral("mf", buildContext));
@@ -58,7 +60,7 @@ public final class MFEnchant {
                 }
         }
 
-    private static LiteralArgumentBuilder<CommandSourceStack> buildRootLiteral(String rootLiteral, CommandBuildContext buildContext) {
+    private static LiteralArgumentBuilder<CommandSourceStack> buildRootLiteral(@NonNull     String rootLiteral, @NonNull     CommandBuildContext buildContext) {
         return Commands.literal(rootLiteral)
                 .then(Commands.literal("enchant")
                         .requires(MFEnchant::canUseEnchantCommand)
@@ -71,7 +73,7 @@ public final class MFEnchant {
     }
 
     private static com.mojang.brigadier.builder.RequiredArgumentBuilder<CommandSourceStack, net.minecraft.commands.arguments.selector.EntitySelector> buildEnchantArguments(
-            CommandBuildContext buildContext,
+            @NonNull     CommandBuildContext buildContext,
             boolean dryRun
     ) {
         return Commands.argument("target", EntityArgument.player())
