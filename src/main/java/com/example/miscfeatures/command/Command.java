@@ -143,6 +143,7 @@ public final class Command {
                 "§6/anvil help\n"
                     + "§7Syntax: §b/anvil\n"
                     + "§7Syntax: §b/anvil rename <name>\n"
+                    + "§7Syntax: §b/anvil clearname\n"
                         + "§7Requires creative mode.\n"
                         + "§7Optional permission gate is controlled by §brequirePermissionForAnvil§7 + §banvilPermissionLevel§7.\n"
                         + "§7Auto-insert behavior is controlled by anvilAutoInsert* config toggles."

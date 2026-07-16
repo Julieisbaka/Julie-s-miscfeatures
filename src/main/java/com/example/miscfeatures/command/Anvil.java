@@ -30,6 +30,8 @@ public final class Anvil {
                 .then(Commands.literal("rename")
                     .then(Commands.argument("name", StringArgumentType.greedyString())
                         .executes(Anvil::renameMainHandItem)))
+                .then(Commands.literal("clearname")
+                    .executes(Anvil::clearMainHandItemName))
         );
     }
 
@@ -100,6 +102,29 @@ public final class Anvil {
 
         mainHand.set(DataComponents.CUSTOM_NAME, Component.literal(parsedName));
         source.sendSuccess(() -> Component.literal("Renamed held item to: ").append(mainHand.getHoverName()), true);
+        return 1;
+    }
+
+    private static int clearMainHandItemName(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        ServerPlayer player = getCreativePlayerOrFail(source);
+        if (player == null) {
+            return 0;
+        }
+
+        ItemStack mainHand = player.getMainHandItem();
+        if (mainHand.isEmpty()) {
+            source.sendFailure(Component.literal("You must hold an item in your main hand to clear its name."));
+            return 0;
+        }
+
+        if (!mainHand.has(DataComponents.CUSTOM_NAME)) {
+            source.sendFailure(Component.literal("Held item does not have a custom name."));
+            return 0;
+        }
+
+        mainHand.remove(DataComponents.CUSTOM_NAME);
+        source.sendSuccess(() -> Component.literal("Cleared custom name from held item."), true);
         return 1;
     }
 
