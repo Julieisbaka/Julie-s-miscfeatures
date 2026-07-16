@@ -58,7 +58,14 @@ public final class Command {
                         .suggests(Command::suggestLocales)
                         .executes(Command::showLocaleCoverageForLocale)
                         .then(Commands.literal("verbose")
-                            .executes(Command::showLocaleCoverageForLocaleVerbose)))));
+                            .executes(Command::showLocaleCoverageForLocaleVerbose)))))
+            .then(Commands.literal("lc")
+                .executes(Command::showLocaleCoverage)
+                .then(Commands.argument("locale", StringArgumentType.word())
+                    .suggests(Command::suggestLocales)
+                    .executes(Command::showLocaleCoverageForLocale)
+                    .then(Commands.literal("verbose")
+                        .executes(Command::showLocaleCoverageForLocaleVerbose))));
     }
 
     private static CompletableFuture<Suggestions> suggestLocales(
@@ -98,10 +105,12 @@ public final class Command {
     private static int showHelp(CommandContext<CommandSourceStack> context) {
         context.getSource().sendSuccess(() -> Component.literal(
                 "§6JulieISBaka Misc Features Help\n"
+                    + "§7- §b/mf version§7 or §b/miscfeatures version§7: show the mod version\n"
                         + "§7- §b/mf help enchant§7: enchant usage, examples, and warnings\n"
                         + "§7- §b/mf help anvil§7: anvil usage and permission notes\n"
                         + "§7- §b/mf help config§7: config examples and key autocomplete usage\n"
                         + "§7- §b/mf locale coverage§7: show missing keys and format mismatches per language\n"
+                    + "§7- §b/mf lc§7: alias for locale coverage\n"
                         + "§7- §b/mf locale coverage <locale> verbose§7: show full key-level locale mismatch details\n"
                         + "§7- §b/mf config show§7: view config with defaults/ranges\n"
                         + "§7- §b/mf config set <setting> <value>§7: change config values (with suggestions)\n"

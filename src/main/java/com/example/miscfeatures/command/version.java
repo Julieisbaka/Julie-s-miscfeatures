@@ -1,5 +1,6 @@
 package com.example.miscfeatures.command;
 
+import com.example.miscfeatures.MiscFeatures;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -14,10 +15,14 @@ public final class version {
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(
-                Commands.literal("version")
-                        .executes(version::execute)
-        );
+        dispatcher.register(buildRootLiteral("miscfeatures"));
+        dispatcher.register(buildRootLiteral("mf"));
+    }
+
+    private static com.mojang.brigadier.builder.LiteralArgumentBuilder<CommandSourceStack> buildRootLiteral(String rootLiteral) {
+        return Commands.literal(rootLiteral)
+                .then(Commands.literal("version")
+                        .executes(version::execute));
     }
 
     private static int execute(CommandContext<CommandSourceStack> context) {

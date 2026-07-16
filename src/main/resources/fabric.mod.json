@@ -11,10 +11,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.example.miscfeatures.MiscFeaturesMod"
+      "com.example.miscfeatures.MiscFeatures"
     ],
     "modmenu": [
-      "com.example.miscfeatures.client.MiscFeaturesModMenu"
+      "com.example.miscfeatures.client.ModMenu"
     ]
   },
   "mixins": [

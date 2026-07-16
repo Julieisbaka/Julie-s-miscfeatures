@@ -8,6 +8,7 @@ import com.example.miscfeatures.command.FindEntity;
 import com.example.miscfeatures.command.FindItem;
 import com.example.miscfeatures.command.Command;
 import com.example.miscfeatures.command.FindBlock;
+import com.example.miscfeatures.command.version;
 import com.example.miscfeatures.command.Wear;
 import com.example.miscfeatures.config.Config;
 import net.fabricmc.api.ModInitializer;
@@ -42,6 +43,7 @@ public class MiscFeatures implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) ->
                 {
                     Command.register(dispatcher);
+                    version.register(dispatcher);
                     FindBlock.register(dispatcher);
                     FindItem.register(dispatcher);
                     FindEntity.register(dispatcher);
