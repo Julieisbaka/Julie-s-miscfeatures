@@ -1,6 +1,5 @@
 package com.example.miscfeatures.command;
 
-import com.example.miscfeatures.MiscFeatures;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -36,7 +35,7 @@ public final class version {
         }
         // TODO: Fetch the version from the mod metadata instead of hardcoding it here.
         source.sendSuccess(() -> Component.literal(
-                "JulieISBaka Misc Features version: 0.0.4"
+                "JulieISBaka Misc Features version: 0.0.5"
         ), true);
         return 1;
     }
