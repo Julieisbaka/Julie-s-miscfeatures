@@ -37,8 +37,3 @@ The items outlined in the roadmap are not the only things that may be changed in
 ## Version 0.0.5
 
 - Add a anvil clearname subcommand
-
-## Version 0.0.4
-
-- Add command alias for locale coverage
-- Add a command to show the mod version
