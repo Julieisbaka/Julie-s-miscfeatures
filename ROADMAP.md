@@ -37,7 +37,3 @@ The items outlined in the roadmap are not the only things that may be changed in
 ## Version 0.0.6
 
 - Normalize all locale identifiers to lowercase once at load-time
-
-## Version 0.0.5
-
-- Add a anvil clearname subcommand
