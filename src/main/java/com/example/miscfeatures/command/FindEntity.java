@@ -345,7 +345,7 @@ public final class FindEntity {
                     .comparingDouble((EntityMatch match) -> match.pos().distSqr(center))
                     .thenComparing(EntityMatch::entityName, String.CASE_INSENSITIVE_ORDER);
             case ALPHABETIC -> Comparator
-                    .comparing(EntityMatch::entityName, String.CASE_INSENSITIVE_ORDER)
+                    .comparing(EntityMatch::entityName, String.CASE_INSENSITIVE_ORDER) // String.CASE_INSENSITIVE_ORDER does not take locale into account - Is this an issue? Should we use Collator.getInstance(Locale.ROOT) instead?
                     .thenComparing(match -> match.pos().getX())
                     .thenComparing(match -> match.pos().getY())
                     .thenComparing(match -> match.pos().getZ());

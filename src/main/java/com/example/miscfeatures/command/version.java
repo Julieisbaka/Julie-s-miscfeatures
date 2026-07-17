@@ -33,7 +33,7 @@ public final class version {
             source.sendFailure(Component.literal("This command can only be used by a player."));
             return 0;
         }
-        // TODO: Fetch the version from the mod metadata instead of hardcoding it here.
+        // TODO: #12 Fetch the version from the mod metadata instead of hardcoding it here.
         source.sendSuccess(() -> Component.literal(
                 "JulieISBaka Misc Features version: 0.0.5"
         ), true);

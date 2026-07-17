@@ -72,6 +72,7 @@ public final class FindItem {
         return AreaSupport.suggestTokenList(builder, suggestions.stream());
     }
 
+    @SuppressWarnings("null")
     private static int execute(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         CommandSourceStack source = context.getSource();
         int radius = IntegerArgumentType.getInteger(context, "radius");
