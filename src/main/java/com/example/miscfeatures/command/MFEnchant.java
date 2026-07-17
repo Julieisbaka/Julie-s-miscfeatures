@@ -151,6 +151,7 @@ public final class MFEnchant {
 
         if (unsafeLevel
                 && config.shouldPreventCreativePacketCrashOnUnsafeEnchants()
+                // TODO: #13 Check if the target is in creative mode instead of checking if they have infinite materials.
                 && target.hasInfiniteMaterials()) {
             source.sendFailure(Component.literal(
                     "Unsafe enchant level blocked for creative target to prevent known creative-slot packet crashes. "
