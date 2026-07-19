@@ -1,9 +1,10 @@
 Julie's (that's me) miscellaneous features mod adds... well, it adds miscellaneous features as the name implies.
-Features
+
+## Features (Not all)
 
 - `/wear`: Ever wanted to wear anything? No? Well, too bad—this mod allows you to do just that. Using the `/wear` command, you can wear anything your heart desires (well, not anything, but a lot of things).
 
-- `/anvil`: Ever wanted to open an anvil without actually placing one down? (Yes, I realize saying "an anvil" multiple times in a sentence is funny, but it is genuinely a useful feature.) This GUI also comes with some special quality-of-life improvements—you'll have to download the mod to see what those are! Or you could look at the changelog, check the GitHub, or ask me... okay fine, there are a lot of ways to figure out the special features, but won't you download it just for me?
+- `/anvil`: Ever wanted to open an anvil without actually placing one down? This GUI also comes with some special quality-of-life improvements—you'll have to download the mod to see what those are! Or you could look at the changelog, check the GitHub, or ask me... okay fine, there are a lot of ways to figure out the special features, but won't you download it just for me?
 
 - Enchantment Tweaks: There are also a few enchantment-related settings. They are a bit technical, so I won't explain them here, but I added them because... I don't really know. They are helpful, though!
 
