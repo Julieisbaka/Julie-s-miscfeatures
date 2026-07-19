@@ -33,7 +33,3 @@ The items outlined in the roadmap are not the only things that may be changed in
 - Find command performance optimizations
 - Bug fixes
 - Localization improvements
-
-## Version 0.0.6
-
-- Normalize all locale identifiers to lowercase once at load-time

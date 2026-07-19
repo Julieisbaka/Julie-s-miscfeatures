@@ -85,7 +85,7 @@ public final class Command {
             List<String> locales = files
                     .map(path -> path.getFileName().toString())
                     .filter(name -> name.endsWith(".json"))
-                    .map(name -> name.substring(0, name.length() - 5).toLowerCase(Locale.ROOT))
+                    .map(Command::normalizeLocaleIdentifier)
                     .distinct()
                     .sorted(String::compareToIgnoreCase)
                     .toList();
@@ -332,7 +332,7 @@ public final class Command {
             files.filter(path -> path.getFileName().toString().endsWith(".json"))
                     .sorted(Comparator.comparing(path -> path.getFileName().toString()))
                     .forEach(path -> {
-                        String locale = path.getFileName().toString().replace(".json", "");
+                        String locale = normalizeLocaleIdentifier(path.getFileName().toString());
                         try {
                             JsonObject object = JsonParser.parseString(Files.readString(path)).getAsJsonObject();
                             Set<String> keys = new HashSet<>();
@@ -367,6 +367,13 @@ public final class Command {
         }
 
         return new LocaleCoverageData(localeKeys, localeValues);
+    }
+
+    private static String normalizeLocaleIdentifier(String fileName) {
+        String locale = fileName.endsWith(".json")
+                ? fileName.substring(0, fileName.length() - 5)
+                : fileName;
+        return locale.toLowerCase(Locale.ROOT);
     }
 
     private static LocaleIssue computeLocaleIssue(

@@ -35,7 +35,7 @@ public final class version {
         }
         // TODO: #12 Fetch the version from the mod metadata instead of hardcoding it here.
         source.sendSuccess(() -> Component.literal(
-                "JulieISBaka Misc Features version: 0.0.5"
+                "JulieISBaka Misc Features version: 0.0.6"
         ), true);
         return 1;
     }
